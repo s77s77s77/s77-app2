@@ -2,6 +2,14 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- ✅ PWA: manifest + iconos -->
+<link rel="manifest" href="./manifest.json">
+<meta name="theme-color" content="#000000">
+<link rel="icon" type="image/png" sizes="192x192" href="./icon-192.png">
+<link rel="icon" type="image/png" sizes="512x512" href="./icon-512.png">
+
 <title>SISTEMA PREMIUM S77</title>
 
 <style>
@@ -506,11 +514,15 @@ nuevo.addEventListener("keydown", async (e) => {
 });
 </script>
 
+<!-- ✅ CLAVE: registrar service worker para que Chrome ofrezca “Instalar app” -->
+<script>
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker.register("./sw.js", { scope: "./" })
+      .catch(() => {});
+  });
+}
+</script>
+
 </body>
 </html>
-
-
-
-
-
-
