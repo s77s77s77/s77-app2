@@ -247,6 +247,38 @@ const API = "https://s77-backend2.onrender.com";
 let TOKEN = "";
 let ROLE = "";
 
+/* ✅ Estado local para:
+   - detectar acierto: si el número ingresado estaba en EXPLOSIVOS antes del Enter
+   - detectar 2 repetidos en los últimos 12 números
+*/
+let lastExplosivosSet = new Set(); // explosivos del cálculo anterior
+let last12 = [];                  // últimos 12 números ingresados
+
+function setExplosivosBG(isAlert){
+  // negro normal, rojo alerta
+  explosivos.style.background = isAlert ? "red" : "black";
+}
+
+function seedLast12(arr){
+  last12 = Array.isArray(arr) ? arr.slice(-12) : [];
+}
+
+function checkTwoRepeatsInLast12(arr){
+  // “dos repetidos” = 2 números distintos que aparezcan al menos 2 veces
+  const counts = new Map();
+  for(const n of arr){
+    counts.set(n, (counts.get(n) || 0) + 1);
+  }
+  let repeatedKinds = 0;
+  counts.forEach(v => { if(v >= 2) repeatedKinds++; });
+  return repeatedKinds >= 2;
+}
+
+/* ✅ Registrar Service Worker (ayuda a que Chrome muestre "Instalar") */
+if ("serviceWorker" in navigator) {
+  navigator.serviceWorker.register("./sw.js").catch(()=>{});
+}
+
 // ✅ Validación simple del número (ruleta europea: 0..36)
 function validarNumero(n){
   if(!Number.isInteger(n)) return { ok:false, msg:"Tenés que ingresar un número entero." };
@@ -371,6 +403,9 @@ async function cargarEstado(){
       renderInicial();
       ocultarAT();
       explosivos.innerText = "—";
+      lastExplosivosSet = new Set();
+      seedLast12([]);
+      setExplosivosBG(false);
       return;
     }
 
@@ -396,10 +431,20 @@ async function cargarEstado(){
       });
     }
 
-    explosivos.innerText = (data.explosivos && data.explosivos.length)
-      ? data.explosivos.join(" ")
-      : "—";
+    // Explosivos
+    const expArr = (data.explosivos && Array.isArray(data.explosivos)) ? data.explosivos : [];
+    explosivos.innerText = expArr.length ? expArr.join(" ") : "—";
+    lastExplosivosSet = new Set(expArr);
 
+    // Seed de últimos 12 (de lo que tenemos disponible)
+    if(Array.isArray(data.ultimos16)) seedLast12(data.ultimos16);
+    else if(Array.isArray(data.ultimos5)) seedLast12(data.ultimos5);
+    else seedLast12([]);
+
+    // Fondo según regla (opcional, pero útil si ya hay estado cargado)
+    setExplosivosBG(checkTwoRepeatsInLast12(last12));
+
+    // A..T
     ocultarAT();
     const elActive = document.getElementById(data.activeId);
     if(elActive){
@@ -411,6 +456,9 @@ async function cargarEstado(){
     renderInicial();
     ocultarAT();
     explosivos.innerText = "—";
+    lastExplosivosSet = new Set();
+    seedLast12([]);
+    setExplosivosBG(false);
   }
 }
 
@@ -433,6 +481,11 @@ async function resetear(){
       return;
     }
 
+    // limpiar estado local + UI
+    lastExplosivosSet = new Set();
+    seedLast12([]);
+    setExplosivosBG(false);
+
     await cargarEstado();
   }catch(e){
     alert("No conecta con el backend.");
@@ -454,6 +507,9 @@ nuevo.addEventListener("keydown", async (e) => {
     return;
   }
 
+  // ✅ ACIERTO: estaba en EXPLOSIVOS antes de enviar
+  const acierto = lastExplosivosSet.has(n);
+
   nuevo.value = "";
 
   try {
@@ -472,6 +528,10 @@ nuevo.addEventListener("keydown", async (e) => {
       alert("No autorizado o error del servidor.");
       return;
     }
+
+    // Mantener últimos 12 local
+    last12.push(n);
+    if(last12.length > 12) last12 = last12.slice(-12);
 
     casilleros.innerHTML = "";
 
@@ -497,10 +557,20 @@ nuevo.addEventListener("keydown", async (e) => {
       });
     }
 
-    explosivos.innerText = (data.explosivos && data.explosivos.length)
-      ? data.explosivos.join(" ")
-      : "—";
+    // Explosivos (y guardar set para el próximo Enter)
+    const expArr = (data.explosivos && Array.isArray(data.explosivos)) ? data.explosivos : [];
+    explosivos.innerText = expArr.length ? expArr.join(" ") : "—";
+    lastExplosivosSet = new Set(expArr);
 
+    // ✅ Fondo rojo si hay 2 repetidos en últimos 12
+    // ✅ Pero si hubo acierto, vuelve a negro (prioridad)
+    if(acierto){
+      setExplosivosBG(false);
+    }else{
+      setExplosivosBG(checkTwoRepeatsInLast12(last12));
+    }
+
+    // A..T
     ocultarAT();
     const elActive = document.getElementById(data.activeId);
     if (elActive) {
@@ -526,5 +596,3 @@ if ("serviceWorker" in navigator) {
 
 </body>
 </html>
-
-
