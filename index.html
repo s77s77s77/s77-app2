@@ -530,6 +530,7 @@ button{padding:10px;background:maroon;color:white;font-weight:bold;border:none;b
   </div>
 
   <button class="logoutBtn" onclick="salir()">SALIR</button>
+  <button class="logoutBtn" onclick="resetApp2()">RESET APP2</button>
 </div>
 
 </div><!-- fin appContent -->
@@ -537,11 +538,17 @@ button{padding:10px;background:maroon;color:white;font-weight:bold;border:none;b
 <script>
 const API = "https://s77-backend2.onrender.com";
 
-const TOKEN_KEY = "S77_TOKEN_V1";
-const ROLE_KEY  = "S77_ROLE_V1";
+// ✅ Keys únicas para s77-app2 (evita que choque con tu otro frontend)
+const TOKEN_KEY = "S77_APP2_TOKEN_V1";
+const ROLE_KEY  = "S77_APP2_ROLE_V1";
 
 let TOKEN = localStorage.getItem(TOKEN_KEY) || "";
 let ROLE  = localStorage.getItem(ROLE_KEY) || "";
+
+// ✅ Registrar Service Worker con path correcto para GitHub Pages
+if ("serviceWorker" in navigator) {
+  navigator.serviceWorker.register("/s77-app2/sw.js");
+}
 
 /* ✅ Offline wall helpers */
 let booted = false;
@@ -578,7 +585,7 @@ function showWinFx(ms = 1200){
 }
 
 /* GANANCIA */
-const GANANCIA_KEY = "S77_GANANCIA_V1";
+const GANANCIA_KEY = "S77_APP2_GANANCIA_V1";
 let gananciaAcum = Number(localStorage.getItem(GANANCIA_KEY) || 0);
 if (!Number.isFinite(gananciaAcum)) gananciaAcum = 0;
 
@@ -842,11 +849,62 @@ async function ingresar(){
 /* SALIR */
 function salir(){
   if(!confirm("¿Seguro querés salir?")) return;
+
   TOKEN = "";
   ROLE = "";
+
+  // ✅ Limpia las keys de s77-app2
   localStorage.removeItem(TOKEN_KEY);
   localStorage.removeItem(ROLE_KEY);
+
+  // ✅ (recomendado) Limpia keys viejas por si antes estaba compartido con el otro frontend
+  localStorage.removeItem("S77_TOKEN_V1");
+  localStorage.removeItem("S77_ROLE_V1");
+
+  // ✅ (opcional) Fuerza actualización del SW si hay uno nuevo esperando
+  if (navigator.serviceWorker && navigator.serviceWorker.controller) {
+    navigator.serviceWorker.controller.postMessage({ type: "SKIP_WAITING" });
+  }
+
   mostrarLogin();
+}
+
+// ✅ RESET TOTAL SOLO APP2 (storage + caches)
+async function resetApp2(){
+  if(!confirm("Esto reiniciará completamente S77 APP2. ¿Continuar?")) return;
+
+  try{
+    // ✅ borrar storage exclusivo de app2
+    localStorage.removeItem("S77_APP2_TOKEN_V1");
+    localStorage.removeItem("S77_APP2_ROLE_V1");
+    localStorage.removeItem("S77_APP2_GANANCIA_V1");
+
+    // ✅ por las dudas, limpiar restos viejos
+    localStorage.removeItem("S77_TOKEN_V1");
+    localStorage.removeItem("S77_ROLE_V1");
+    localStorage.removeItem("S77_GANANCIA_V1");
+
+    // ✅ borrar caches exclusivos de app2
+    if("caches" in window){
+      const keys = await caches.keys();
+      for(const key of keys){
+        if(key.startsWith("s77-app2")){
+          await caches.delete(key);
+        }
+      }
+    }
+
+    // ✅ reset variables en memoria
+    TOKEN = "";
+    ROLE  = "";
+    gananciaAcum = 0;
+
+    alert("S77 APP2 fue reiniciado correctamente");
+    location.reload();
+
+  }catch(e){
+    alert("Error al reiniciar: " + e.message);
+  }
 }
 
 /* Render inicial */
@@ -1091,4 +1149,3 @@ async function boot(){
 
 </body>
 </html>
-
