@@ -5,7 +5,8 @@
 const BASE_PATH = "/s77-app2";
 
 // ✅ Cache version ÚNICA para app2 (para que no choque con el sistema original)
-const SW_VERSION = "s77-app2-v2026-02-12-01";
+// ⬇️ SUBÍ VERSIÓN para forzar update
+const SW_VERSION = "s77-app2-v2026-02-12-02";
 
 // ✅ Cacheamos solo assets que ayudan a cargar rápido (incluye splash)
 const CORE_ASSETS = [
@@ -18,6 +19,10 @@ const CORE_ASSETS = [
   `${BASE_PATH}/btn-neon-gold.png`,
   `${BASE_PATH}/bg-acierto-blue.png`,
   `${BASE_PATH}/splash.png`,
+
+  // ✅ IMPORTANTE: tu HTML lo usa
+  `${BASE_PATH}/success-cav.lottie`,
+
   `${BASE_PATH}/sw.js`
 ];
 
