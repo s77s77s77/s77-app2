@@ -24,6 +24,17 @@ body{
   padding:20px;
 }
 
+body::before{
+  content:"";
+  position:fixed;
+  top:0;
+  left:0;
+  right:0;
+  bottom:0;
+  background: rgba(0,0,0,0.65);
+  z-index:-1;
+}
+
 h1{
   color: white;
   letter-spacing: 3px;
@@ -76,23 +87,9 @@ h1{
   }
 }
 
-#explosivosTitle,
-#repuestoTitle{
-  display:none !important;
+.hidden{
+  display:none;
 }
-
-body::before{
-  content:"";
-  position:fixed;
-  top:0;
-  left:0;
-  right:0;
-  bottom:0;
-  background: rgba(0,0,0,0.65);
-  z-index:-1;
-}
-
-.hidden{display:none;}
 
 .inputs{
   display:grid;
@@ -166,8 +163,6 @@ body::before{
   display:flex;
   align-items:center;
   justify-content:center;
-  line-height:1;
-  padding:0;
 
   border-radius:10px;
 
@@ -177,7 +172,8 @@ body::before{
 .totalLabel{
   margin-top:0;
   font-weight:bold;
-  color:#0b8f3a;
+  color:#00e5ff;
+  text-shadow:0 0 6px #00e5ff;
 }
 
 .gananciaBox{
@@ -197,8 +193,6 @@ body::before{
   display:flex;
   align-items:center;
   justify-content:center;
-  line-height:1;
-  padding:0;
 
   border-radius:10px;
 
@@ -208,7 +202,39 @@ body::before{
 .gananciaLabel{
   margin-top:0;
   font-weight:bold;
-  color:#ffd400;
+  color:#ffd700;
+  text-shadow:0 0 6px #ffd700;
+}
+
+.fichaBox{
+  width:80px;
+  height:80px;
+  font-size:36px;
+  font-weight:bold;
+
+  background-image: url("./ficha-verde.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  border:none;
+
+  color:#000;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  border-radius:8px;
+
+  text-shadow: 0 1px 3px rgba(0,0,0,0.5);
+}
+
+.fichaLabel{
+  margin-top:0;
+  font-weight:bold;
+  color:#00ff88;
+  text-shadow:0 0 6px #00ff88;
 }
 
 .aciertoWrap{
@@ -231,6 +257,7 @@ body::before{
   background-repeat: no-repeat;
 
   border:none;
+
   color:#ffffff;
 
   display:none;
@@ -247,47 +274,34 @@ body::before{
 .aciertoLabel{
   margin-top:0;
   font-weight:bold;
-  color:#0b57ff;
+  color:#00e5ff;
+  text-shadow:0 0 6px #00e5ff;
   display:none;
 }
 
 .box{
-  width:260px;
+  width:320px;
   min-height:60px;
   margin:10px auto;
   border:6px solid #444;
   font-weight:bold;
-  padding:5px;
+  padding:10px;
 }
 
-.explosivos{
-  background: #0b1a2a;
-  color: #ffffff;
-  font-size: 48px;
-  font-weight: bold;
-
-  padding: 16px;
-  border-radius: 8px;
-
-  border: 3px solid #c9a24d;
-
-  box-shadow:
-    0 0 4px rgba(0,0,0,0.8),
-    0 2px 6px rgba(0,0,0,0.9);
-
-  text-shadow:
-    0 1px 2px rgba(0,0,0,0.9);
+.favoritosBox{
+  background:#0b1a2a;
+  color:#ffffff;
+  font-size:42px;
+  border:3px solid #00e5ff;
 }
 
-.repuesto{
-  display:none !important;
-}
-
-.repuestoTitle{
-  display:none !important;
-}
-
-button{
+.repetidosBox{
+  background:#2b0f14;
+  color:#ffffff;
+  font-size:42px;
+  border:3px solid #ff00ff;
+  }
+  button{
   padding:10px;
   background:maroon;
   color:white;
@@ -296,41 +310,7 @@ button{
   border-radius:8px;
 }
 
-.abcWrap{
-  display:flex;
-  gap:10px;
-  justify-content:center;
-  margin-top:12px;
-  flex-wrap:wrap;
-}
-
-.abc{
-  width:80px;
-  height:80px;
-  font-size:36px;
-  font-weight:bold;
-
-  background-image: url("ficha-verde.png");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-
-  border:none;
-  color:#000;
-
-  display:none;
-  align-items:center;
-  justify-content:center;
-
-  border-radius:8px;
-
-  text-shadow: 0 1px 3px rgba(0,0,0,0.5);
-}
-
-#MULT{
-  display:flex !important;
-  }
-  .loginBox{
+.loginBox{
   display:inline-block;
   padding:14px 16px;
   border:2px solid #444;
@@ -493,12 +473,14 @@ button{
 </head>
 
 <body>
-
-<div id="splash"></div>
+  <div id="splash"></div>
 
 <div id="offlineWall">
   <div class="offlineCard">
-    <div class="offlineTitle">REQUIERE CONEXIÓN A INTERNET</div>
+
+    <div class="offlineTitle">
+      REQUIERE CONEXIÓN A INTERNET
+    </div>
 
     <div class="offlineText">
       Para usar el sistema necesitás estar online.<br>
@@ -508,6 +490,7 @@ button{
     <button class="offlineBtn" onclick="location.reload()">
       REINTENTAR
     </button>
+
   </div>
 </div>
 
@@ -530,154 +513,195 @@ button{
   </div>
 
   <p id="err" style="color:red;margin:6px 0 0;"></p>
+
 </div>
 
 <div id="sistema" class="hidden">
 
-<div class="inputs" id="casilleros"></div>
+  <div class="inputs" id="casilleros"></div>
 
-<br>
+  <br>
 
-<div class="ingreso">
+  <div class="ingreso">
 
-  <div class="ingresoCol">
-    <input id="nuevo" class="ingresoInput">
-
-    <div class="label"
-      style="color:#00ff88; text-shadow:0 0 6px #00ff88;">
-      INGRESO
+    <div class="ingresoCol">
+      <input id="nuevo" class="ingresoInput">
+      <div class="label" style="color:#00ff88;">
+        INGRESO
+      </div>
     </div>
+
+    <div class="ingresoCol">
+
+      <div id="totalFavoritos" class="totalBox">0</div>
+
+      <div class="totalLabel">
+        TOTAL FAVORITOS
+      </div>
+
+      <div id="fichaFavoritos" class="fichaBox">1</div>
+
+      <div class="fichaLabel">
+        FICHA FAVORITOS
+      </div>
+
+    </div>
+
+    <div class="ingresoCol">
+
+      <div id="gananciaFavoritos" class="gananciaBox">0</div>
+
+      <div class="gananciaLabel">
+        GANANCIA FAVORITOS
+      </div>
+
+      <div class="aciertoWrap">
+
+        <div id="aciertoFavoritos" class="aciertoBox">
+          0
+        </div>
+
+        <div id="aciertoFavoritosLabel" class="aciertoLabel">
+          ACIERTO
+        </div>
+
+      </div>
+
+    </div>
+
   </div>
+    <br>
+  <br>
 
-  <div class="ingresoCol">
-    <div id="totalFichas" class="totalBox">0</div>
+  <!-- =========================
+       REPETIDOS
+  ========================== -->
 
-    <div class="totalLabel"
-      style="color:#00e5ff; text-shadow:0 0 6px #00e5ff;">
-      TOTAL
+  <div class="ingreso">
+
+    <div class="ingresoCol">
+
+      <div id="repetidosBox" class="box repetidosBox">
+        —
+      </div>
+
+      <div class="label" style="color:#ff00ff;">
+        REPETIDOS
+      </div>
+
     </div>
-  </div>
 
-  <div class="ingresoCol">
+    <div class="ingresoCol">
 
-    <div id="gananciaBox" class="gananciaBox">0</div>
+      <div id="totalRepetidos" class="totalBox">
+        0
+      </div>
 
-    <div class="gananciaLabel"
-      style="color:#ffd700; text-shadow:0 0 6px #ffd700;">
-      GANANCIA
+      <div class="totalLabel">
+        TOTAL REPETIDOS
+      </div>
+
+      <div id="fichaRepetidos" class="fichaBox">
+        1
+      </div>
+
+      <div class="fichaLabel">
+        FICHA REPETIDOS
+      </div>
+
     </div>
 
-    <div class="aciertoWrap">
+    <div class="ingresoCol">
 
-      <div id="aciertoBox" class="aciertoBox">0</div>
+      <div id="gananciaRepetidos" class="gananciaBox">
+        0
+      </div>
 
-      <div id="aciertoLabel"
-        class="aciertoLabel"
-        style="color:#00e5ff; text-shadow:0 0 6px #00e5ff;">
-        ACIERTO
+      <div class="gananciaLabel">
+        GANANCIA REPETIDOS
+      </div>
+
+      <div class="aciertoWrap">
+
+        <div id="aciertoRepetidos" class="aciertoBox">
+          0
+        </div>
+
+        <div id="aciertoRepetidosLabel" class="aciertoLabel">
+          ACIERTO
+        </div>
+
       </div>
 
     </div>
 
   </div>
 
-</div>
-<div id="winFx">
-  <dotlottie-player
-    id="winPlayer"
-    src="./success-cav.lottie"
-    background="transparent"
-    speed="1"
-    loop="false"
-    autoplay="false">
-  </dotlottie-player>
-</div>
+  <br>
 
-<div style="margin-top:12px;">
-  <button onclick="resetear()">REINICIAR</button>
-</div>
+  <!-- =========================
+       FAVORITOS
+  ========================== -->
 
-<h3 id="explosivosTitle" style="color:black">EXPLOSIVOS</h3>
-
-<div id="explosivos" class="box explosivos">—</div>
-
-<h3 id="repuestoTitle" class="repuestoTitle">REPUESTO</h3>
-
-<div id="repuesto" class="box repuesto">—</div>
-
-<div class="abcWrap">
-
-  <div id="MULT" class="abc"></div>
-
-  <div id="A" class="abc"></div>
-  <div id="B" class="abc"></div>
-  <div id="C" class="abc"></div>
-  <div id="D" class="abc"></div>
-  <div id="E" class="abc"></div>
-  <div id="F" class="abc"></div>
-  <div id="G" class="abc"></div>
-  <div id="H" class="abc"></div>
-  <div id="I" class="abc"></div>
-  <div id="J" class="abc"></div>
-  <div id="K" class="abc"></div>
-  <div id="L" class="abc"></div>
-  <div id="M" class="abc"></div>
-  <div id="N" class="abc"></div>
-  <div id="O" class="abc"></div>
-  <div id="P" class="abc"></div>
-  <div id="Q" class="abc"></div>
-  <div id="R" class="abc"></div>
-  <div id="S" class="abc"></div>
-  <div id="T" class="abc"></div>
-  <div id="U" class="abc"></div>
-  <div id="V" class="abc"></div>
-  <div id="W" class="abc"></div>
-  <div id="X" class="abc"></div>
-  <div id="Y" class="abc"></div>
-  <div id="Z" class="abc"></div>
-  <div id="AA" class="abc"></div>
-  <div id="AB" class="abc"></div>
-  <div id="AC" class="abc"></div>
-  <div id="AD" class="abc"></div>
-  <div id="AE" class="abc"></div>
-  <div id="AF" class="abc"></div>
-  <div id="AG" class="abc"></div>
-  <div id="AH" class="abc"></div>
-  <div id="AI" class="abc"></div>
-  <div id="AJ" class="abc"></div>
-  <div id="AK" class="abc"></div>
-  <div id="AL" class="abc"></div>
-  <div id="AM" class="abc"></div>
-  <div id="AN" class="abc"></div>
-
-</div>
-
-<div id="adminPanel" class="adminPanel hidden">
-
-  <div class="adminTitle">
-    CREAR USUARIO (CON VENCIMIENTO)
+  <div id="favoritosBox" class="box favoritosBox">
+    —
   </div>
 
-  <div class="adminGrid">
-    <input id="newUser" placeholder="Usuario">
-    <input id="newPass" placeholder="Clave">
+  <div class="label" style="color:#00e5ff;font-size:26px;">
+    FAVORITOS
   </div>
 
-  <div class="adminBtns">
-    <button onclick="crearUsuario(1)">1 DÍA</button>
-    <button onclick="crearUsuario(7)">7 DÍAS</button>
-    <button onclick="crearUsuario(30)">30 DÍAS</button>
+  <div id="winFx">
+
+    <dotlottie-player
+      id="winPlayer"
+      src="./success-cav.lottie"
+      background="transparent"
+      speed="1"
+      loop="false"
+      autoplay="false">
+    </dotlottie-player>
+
   </div>
 
-  <div id="adminOut" class="adminOut"></div>
+  <div style="margin-top:12px;">
+    <button onclick="resetear()">REINICIAR</button>
+  </div>
+    <div id="adminPanel" class="adminPanel hidden">
 
-  <div class="smallNote">
-    Se guarda en el servidor (backend).
+    <div class="adminTitle">
+      CREAR USUARIO (CON VENCIMIENTO)
+    </div>
+
+    <div class="adminGrid">
+
+      <input id="newUser" placeholder="Usuario">
+
+      <input id="newPass" placeholder="Clave">
+
+    </div>
+
+    <div class="adminBtns">
+
+      <button onclick="crearUsuario(1)">1 DÍA</button>
+
+      <button onclick="crearUsuario(7)">7 DÍAS</button>
+
+      <button onclick="crearUsuario(30)">30 DÍAS</button>
+
+    </div>
+
+    <div id="adminOut" class="adminOut"></div>
+
+    <div class="smallNote">
+      Se guarda en el servidor (backend).
+    </div>
+
   </div>
 
-</div>
-
-<button class="logoutBtn" onclick="salir()">SALIR</button>
+  <button class="logoutBtn" onclick="salir()">
+    SALIR
+  </button>
 
 </div>
 
@@ -694,33 +718,36 @@ let TOKEN = localStorage.getItem(TOKEN_KEY) || "";
 let ROLE  = localStorage.getItem(ROLE_KEY) || "";
 
 function fetchWithTimeout(url, options = {}, timeoutMs = 12000){
+
   const controller = new AbortController();
 
-  const id = setTimeout(() => controller.abort(), timeoutMs);
+  const id = setTimeout(
+    () => controller.abort(),
+    timeoutMs
+  );
 
-  return fetch(url, { ...options, signal: controller.signal })
-    .finally(() => clearTimeout(id));
+  return fetch(url, {
+    ...options,
+    signal: controller.signal
+  }).finally(() => clearTimeout(id));
 }
 
 let booted = false;
 
 function setOfflineWall(){
+
   const wall = document.getElementById("offlineWall");
+
   const online = navigator.onLine;
 
   if(!wall) return;
 
   wall.style.display = online ? "none" : "flex";
-
-  if(!online){
-    try{
-      renderAcierto(false, 0);
-    }catch(e){}
-  }
 }
-let winFxTimer = null;
+  let winFxTimer = null;
 
 function showWinFx(ms = 1200){
+
   const fx = document.getElementById("winFx");
   const player = document.getElementById("winPlayer");
 
@@ -740,104 +767,157 @@ function showWinFx(ms = 1200){
   }, ms);
 }
 
-/* GANANCIA */
-const GANANCIA_KEY = "S77_GANANCIA_V1";
-let gananciaAcum = Number(localStorage.getItem(GANANCIA_KEY) || 0);
+/* =========================
+   GANANCIAS LOCALES
+========================= */
 
-if (!Number.isFinite(gananciaAcum)) {
-  gananciaAcum = 0;
+const GANANCIA_FAVORITOS_KEY = "S77_GANANCIA_FAVORITOS_V1";
+const GANANCIA_REPETIDOS_KEY = "S77_GANANCIA_REPETIDOS_V1";
+
+let gananciaFavoritosAcum = Number(
+  localStorage.getItem(GANANCIA_FAVORITOS_KEY) || 0
+);
+
+let gananciaRepetidosAcum = Number(
+  localStorage.getItem(GANANCIA_REPETIDOS_KEY) || 0
+);
+
+if(!Number.isFinite(gananciaFavoritosAcum)){
+  gananciaFavoritosAcum = 0;
 }
 
-function setGanancia(v){
+if(!Number.isFinite(gananciaRepetidosAcum)){
+  gananciaRepetidosAcum = 0;
+}
+
+function setGananciaFavoritos(v){
+
   const n = Number(v);
 
-  gananciaAcum = Number.isFinite(n) ? n : 0;
+  gananciaFavoritosAcum = Number.isFinite(n) ? n : 0;
 
-  gananciaBox.textContent = String(Math.round(gananciaAcum));
+  gananciaFavoritos.textContent = String(
+    Math.round(gananciaFavoritosAcum)
+  );
 
-  localStorage.setItem(GANANCIA_KEY, String(gananciaAcum));
+  localStorage.setItem(
+    GANANCIA_FAVORITOS_KEY,
+    String(gananciaFavoritosAcum)
+  );
 }
 
-setGanancia(gananciaAcum);
+function setGananciaRepetidos(v){
 
-function renderAcierto(show, value){
-  const box = document.getElementById("aciertoBox");
-  const lab = document.getElementById("aciertoLabel");
+  const n = Number(v);
+
+  gananciaRepetidosAcum = Number.isFinite(n) ? n : 0;
+
+  gananciaRepetidos.textContent = String(
+    Math.round(gananciaRepetidosAcum)
+  );
+
+  localStorage.setItem(
+    GANANCIA_REPETIDOS_KEY,
+    String(gananciaRepetidosAcum)
+  );
+}
+
+setGananciaFavoritos(gananciaFavoritosAcum);
+setGananciaRepetidos(gananciaRepetidosAcum);
+  function renderAciertoFavoritos(show, value){
+
+  const box = document.getElementById("aciertoFavoritos");
+  const lab = document.getElementById("aciertoFavoritosLabel");
 
   if(!box || !lab) return;
 
   if(show){
+
     box.style.display = "flex";
     lab.style.display = "block";
-    box.textContent = String(Math.round(Number(value)||0));
+    box.textContent = String(Math.round(Number(value) || 0));
+
   }else{
+
     box.style.display = "none";
     lab.style.display = "none";
     box.textContent = "0";
   }
 }
 
-function sumarGananciaDesdeAcierto(value){
+function renderAciertoRepetidos(show, value){
+
+  const box = document.getElementById("aciertoRepetidos");
+  const lab = document.getElementById("aciertoRepetidosLabel");
+
+  if(!box || !lab) return;
+
+  if(show){
+
+    box.style.display = "flex";
+    lab.style.display = "block";
+    box.textContent = String(Math.round(Number(value) || 0));
+
+  }else{
+
+    box.style.display = "none";
+    lab.style.display = "none";
+    box.textContent = "0";
+  }
+}
+
+function sumarGananciaFavoritos(value){
+
   const n = Number(value);
 
   if(!Number.isFinite(n)) return;
 
-  setGanancia(gananciaAcum + n);
+  setGananciaFavoritos(gananciaFavoritosAcum + n);
 }
 
-function setTotalFichas(v){
+function sumarGananciaRepetidos(value){
+
+  const n = Number(value);
+
+  if(!Number.isFinite(n)) return;
+
+  setGananciaRepetidos(gananciaRepetidosAcum + n);
+}
+
+function setTotalFavoritos(v){
+
   const n = Number(v);
 
-  totalFichas.textContent = Number.isFinite(n)
+  totalFavoritos.textContent = Number.isFinite(n)
     ? String(Math.round(n))
     : "0";
 }
 
-/* WARN / COMPATIBILIDAD */
-function getWarnModeFromData(data){
-  if(data && typeof data.warnMode === "string") return data.warnMode;
-  if(data && data.warnRepeats) return "red";
-  return "none";
+function setTotalRepetidos(v){
+
+  const n = Number(v);
+
+  totalRepetidos.textContent = Number.isFinite(n)
+    ? String(Math.round(n))
+    : "0";
 }
 
-function aplicarSuspensionUI(active){
-  const expTitle = document.getElementById("explosivosTitle");
-  const repTitle = document.getElementById("repuestoTitle");
-  const repBox   = document.getElementById("repuesto");
+function setFichaFavoritos(v){
 
-  if(active){
-    if(expTitle) expTitle.style.display = "none";
-    explosivos.style.display = "none";
+  const n = Number(v);
 
-    if(repTitle) repTitle.style.display = "none";
-
-    if(repBox){
-      repBox.style.display = "none";
-      repBox.textContent = "—";
-    }
-
-    renderAcierto(false, 0);
-  }
+  fichaFavoritos.textContent = Number.isFinite(n)
+    ? String(Math.round(n))
+    : "1";
 }
 
-function aplicarWarnMode(mode){
-  const expBox = document.getElementById("explosivos");
-  const repBox = document.getElementById("repuesto");
+function setFichaRepetidos(v){
 
-  if(!expBox || !repBox) return;
+  const n = Number(v);
 
-  expBox.style.display = "block";
-  repBox.style.display = "none";
-  repBox.textContent = "—";
-}
-
-function renderRepuesto(arr, mode, suspensionActive){
-  const box = document.getElementById("repuesto");
-
-  if(!box) return;
-
-  box.style.display = "none";
-  box.textContent = "—";
+  fichaRepetidos.textContent = Number.isFinite(n)
+    ? String(Math.round(n))
+    : "1";
   }
   const NUM_BG = {
   0:"#0b7a3b",
@@ -852,6 +932,7 @@ function renderRepuesto(arr, mode, suspensionActive){
 };
 
 function pintarCasilleroPorNumero(inputEl){
+
   const v = parseInt(inputEl.value, 10);
 
   inputEl.style.background = Number.isFinite(v)
@@ -863,63 +944,39 @@ function pintarCasilleroPorNumero(inputEl){
 }
 
 function validarNumero(n){
+
   if(!Number.isInteger(n)){
-    return { ok:false, msg:"Tenés que ingresar un número entero." };
+    return {
+      ok:false,
+      msg:"Tenés que ingresar un número entero."
+    };
   }
 
   if(n < 0 || n > 36){
-    return { ok:false, msg:"Solo se permiten números del 0 al 36." };
+    return {
+      ok:false,
+      msg:"Solo se permiten números del 0 al 36."
+    };
   }
 
-  return { ok:true, msg:"" };
+  return {
+    ok:true,
+    msg:""
+  };
 }
 
-let conteoPausado = false;
-let cacheActiveId = "A";
-let cacheActiveMult = 1;
-let cacheInicializado = false;
+function renderLista(el, arr){
 
-function ocultarAT(){
-  const ids = [
-    "MULT",
-    "A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T",
-    "U","V","W","X","Y","Z",
-    "AA","AB","AC","AD","AE","AF","AG","AH","AI","AJ","AK","AL","AM","AN"
-  ];
+  const clean = Array.isArray(arr)
+    ? [...arr].sort((a,b)=>Number(a)-Number(b))
+    : [];
 
-  ids.forEach(id=>{
-    const el = document.getElementById(id);
-
-    if(!el) return;
-
-    el.style.display = "none";
-    el.textContent = "";
-  });
-}
-
-function mostrarAT(id, mult){
-  ocultarAT();
-
-  const multEl = document.getElementById("MULT");
-
-  if(multEl){
-    multEl.style.display = "flex";
-    multEl.textContent = String(Number(mult) || 0);
-  }
-}
-
-function aplicarConteoDesdeBackend(activeId, activeMult){
-  cacheInicializado = true;
-  cacheActiveId = activeId || "A";
-  cacheActiveMult = Number(activeMult) || 1;
-
-  mostrarAT(cacheActiveId, cacheActiveMult);
-}
-
-function syncPausaConteoConColor(){
-  conteoPausado = false;
+  el.textContent = clean.length
+    ? clean.join(" ")
+    : "—";
   }
   async function crearUsuario(dias){
+
   if(ROLE !== "admin"){
     adminOut.innerHTML = "Solo admin puede crear usuarios.";
     return;
@@ -934,19 +991,28 @@ function syncPausaConteoConColor(){
   }
 
   try{
+
     const r = await fetchWithTimeout(`${API}/admin/create-user`,{
+
       method:"POST",
+
       headers:{
         "Content-Type":"application/json",
         "Authorization": `Bearer ${TOKEN}`
       },
-      body: JSON.stringify({ user:u, pass:p, days:dias })
+
+      body: JSON.stringify({
+        user:u,
+        pass:p,
+        days:dias
+      })
+
     }, 12000);
 
     const data = await r.json();
 
     if(!r.ok){
-      adminOut.innerHTML = "Error creando usuario (¿token inválido o no sos admin?)";
+      adminOut.innerHTML = "Error creando usuario.";
       return;
     }
 
@@ -959,11 +1025,13 @@ function syncPausaConteoConColor(){
       `<b>Vence:</b> ${expDate} (${dias} día${dias===1?"":"s"})`;
 
   }catch(e){
-    adminOut.innerHTML = "No conecta con el servidor. ¿Está prendido el backend?";
+
+    adminOut.innerHTML = "No conecta con el servidor.";
   }
 }
 
 function mostrarLogin(){
+
   login.classList.remove("hidden");
   login.style.display = "inline-block";
 
@@ -972,6 +1040,7 @@ function mostrarLogin(){
 }
 
 function mostrarSistema(){
+
   login.classList.add("hidden");
   login.style.display = "none";
 
@@ -986,6 +1055,7 @@ function mostrarSistema(){
 }
 
 async function ingresar(){
+
   if(!navigator.onLine){
     setOfflineWall();
     return;
@@ -1000,10 +1070,20 @@ async function ingresar(){
   }
 
   try{
+
     const r = await fetchWithTimeout(`${API}/auth/login`,{
+
       method:"POST",
-      headers:{ "Content-Type":"application/json" },
-      body: JSON.stringify({ user:u, pass:p })
+
+      headers:{
+        "Content-Type":"application/json"
+      },
+
+      body: JSON.stringify({
+        user:u,
+        pass:p
+      })
+
     }, 12000);
 
     const data = await r.json();
@@ -1022,14 +1102,17 @@ async function ingresar(){
     err.innerText = "";
 
     mostrarSistema();
+
     await cargarEstado();
 
   }catch(e){
+
     err.innerText = "No conecta con el servidor. ¿Está prendido el backend?";
   }
 }
 
 function salir(){
+
   if(!confirm("¿Seguro querés salir?")) return;
 
   TOKEN = "";
@@ -1041,11 +1124,13 @@ function salir(){
   mostrarLogin();
   }
   function renderInicial(){
+
   casilleros.innerHTML = "";
   casilleros.style.gridTemplateColumns = "repeat(4,70px)";
 
   for(let i=0;i<16;i++){
-    let c = document.createElement("input");
+
+    const c = document.createElement("input");
 
     c.disabled = true;
     c.value = "";
@@ -1054,6 +1139,65 @@ function salir(){
 
     casilleros.appendChild(c);
   }
+}
+
+function renderCasilleros(data){
+
+  casilleros.innerHTML = "";
+
+  if(data.historialLen < 17){
+
+    casilleros.style.gridTemplateColumns = "repeat(4,70px)";
+
+    data.ultimos16.forEach(v => {
+
+      const c = document.createElement("input");
+
+      c.disabled = true;
+      c.value = v;
+
+      pintarCasilleroPorNumero(c);
+
+      casilleros.appendChild(c);
+    });
+
+    if(data.historialLen === 0){
+      renderInicial();
+    }
+
+  }else{
+
+    casilleros.style.gridTemplateColumns = "repeat(5,70px)";
+
+    data.ultimos5.forEach(v => {
+
+      const c = document.createElement("input");
+
+      c.disabled = true;
+      c.value = v;
+
+      pintarCasilleroPorNumero(c);
+
+      casilleros.appendChild(c);
+    });
+  }
+}
+
+function renderEstado(data){
+
+  renderCasilleros(data);
+
+  renderLista(favoritosBox, data.favoritos);
+  renderLista(repetidosBox, data.repetidos || data.explosivos);
+
+  setTotalFavoritos(data.fichasTotalFavoritos);
+  setTotalRepetidos(data.fichasTotalRepetidos);
+
+  setFichaFavoritos(data.activeMultFavoritos);
+  setFichaRepetidos(data.activeMultRepetidos);
+
+  renderAciertoFavoritos(false, 0);
+  renderAciertoRepetidos(false, 0);
 }
 
 async function cargarEstado(){
@@ -1066,10 +1210,13 @@ async function cargarEstado(){
   try{
 
     const r = await fetchWithTimeout(`${API}/api/state`,{
+
       method:"GET",
+
       headers:{
         "Authorization": `Bearer ${TOKEN}`
       }
+
     }, 12000);
 
     const data = await r.json();
@@ -1079,70 +1226,11 @@ async function cargarEstado(){
       return;
     }
 
-    casilleros.innerHTML = "";
-
-    if(data.historialLen < 17){
-
-      casilleros.style.gridTemplateColumns = "repeat(4,70px)";
-
-      data.ultimos16.forEach(v => {
-
-        const c = document.createElement("input");
-
-        c.disabled = true;
-        c.value = v;
-
-        pintarCasilleroPorNumero(c);
-
-        casilleros.appendChild(c);
-      });
-
-      if(data.historialLen === 0){
-        renderInicial();
-      }
-
-    }else{
-
-      casilleros.style.gridTemplateColumns = "repeat(5,70px)";
-
-      data.ultimos5.forEach(v => {
-
-        const c = document.createElement("input");
-
-        c.disabled = true;
-        c.value = v;
-
-        pintarCasilleroPorNumero(c);
-
-        casilleros.appendChild(c);
-      });
-    }
-
-    const explosivosOrdenados = Array.isArray(data.explosivos)
-      ? [...data.explosivos].sort((a,b)=>Number(a)-Number(b))
-      : [];
-
-    explosivos.innerText = explosivosOrdenados.length
-      ? explosivosOrdenados.join(" ")
-      : "—";
-
-    aplicarWarnMode("none");
-
-    renderRepuesto([], "none", false);
-
-    setTotalFichas(data.fichasTotal);
-
-    aplicarConteoDesdeBackend(
-      data.activeId,
-      data.activeMult
-    );
-
-    renderAcierto(false, 0);
+    renderEstado(data);
 
   }catch(e){}
-}
-
-async function resetear(){
+  }
+  async function resetear(){
 
   if(!navigator.onLine){
     setOfflineWall();
@@ -1159,10 +1247,13 @@ async function resetear(){
   try{
 
     const r = await fetchWithTimeout(`${API}/api/reset`,{
+
       method:"POST",
+
       headers:{
         "Authorization": `Bearer ${TOKEN}`
       }
+
     }, 12000);
 
     if(!r.ok){
@@ -1170,15 +1261,20 @@ async function resetear(){
       return;
     }
 
-    aplicarWarnMode("none");
+    setTotalFavoritos(0);
+    setTotalRepetidos(0);
 
-    setTotalFichas(0);
+    setFichaFavoritos(1);
+    setFichaRepetidos(1);
 
-    renderRepuesto([], "none", false);
+    setGananciaFavoritos(0);
+    setGananciaRepetidos(0);
 
-    renderAcierto(false, 0);
+    renderAciertoFavoritos(false, 0);
+    renderAciertoRepetidos(false, 0);
 
-    setGanancia(0);
+    renderLista(favoritosBox, []);
+    renderLista(repetidosBox, []);
 
     const fx = document.getElementById("winFx");
 
@@ -1190,16 +1286,17 @@ async function resetear(){
 
   }catch(e){
 
-    if (e && e.name === "AbortError") {
-      alert("El servidor tardó demasiado y se cortó la petición. Intentá de nuevo.");
-    } else {
+    if(e && e.name === "AbortError"){
+      alert("El servidor tardó demasiado y se cortó la petición.");
+    }else{
       alert("No conecta con el backend.");
     }
   }
-  }
-  nuevo.addEventListener("keydown", async (e) => {
+}
 
-  if (e.key !== "Enter") return;
+nuevo.addEventListener("keydown", async (e) => {
+
+  if(e.key !== "Enter") return;
 
   if(!navigator.onLine){
     setOfflineWall();
@@ -1222,14 +1319,14 @@ async function resetear(){
 
   nuevo.value = "";
 
-  try {
+  try{
 
-    const r = await fetchWithTimeout(`${API}/api/enter`, {
+    const r = await fetchWithTimeout(`${API}/api/enter`,{
 
-      method: "POST",
+      method:"POST",
 
-      headers: {
-        "Content-Type": "application/json",
+      headers:{
+        "Content-Type":"application/json",
         "Authorization": `Bearer ${TOKEN}`
       },
 
@@ -1239,93 +1336,44 @@ async function resetear(){
 
     const data = await r.json();
 
-    if (!r.ok){
+    if(!r.ok){
       salir();
       return;
     }
 
-    casilleros.innerHTML = "";
+    renderEstado(data);
 
-    if (data.historialLen < 17) {
+    const showFav = !!data.aciertoShowFavoritos;
+    const valFav  = Number(data.aciertoValueFavoritos);
 
-      casilleros.style.gridTemplateColumns = "repeat(4,70px)";
+    const showRep = !!data.aciertoShowRepetidos;
+    const valRep  = Number(data.aciertoValueRepetidos);
 
-      data.ultimos16.forEach(v => {
+    renderAciertoFavoritos(showFav, valFav);
+    renderAciertoRepetidos(showRep, valRep);
 
-        const c = document.createElement("input");
-
-        c.disabled = true;
-        c.value = v;
-
-        pintarCasilleroPorNumero(c);
-
-        casilleros.appendChild(c);
-      });
-
-      if(data.historialLen === 0){
-        renderInicial();
-      }
-
-    } else {
-
-      casilleros.style.gridTemplateColumns = "repeat(5,70px)";
-
-      data.ultimos5.forEach(v => {
-
-        const c = document.createElement("input");
-
-        c.disabled = true;
-        c.value = v;
-
-        pintarCasilleroPorNumero(c);
-
-        casilleros.appendChild(c);
-      });
+    if(showFav){
+      sumarGananciaFavoritos(valFav);
     }
 
-    const explosivosOrdenados = Array.isArray(data.explosivos)
-      ? [...data.explosivos].sort((a,b)=>Number(a)-Number(b))
-      : [];
+    if(showRep){
+      sumarGananciaRepetidos(valRep);
+    }
 
-    explosivos.innerText = explosivosOrdenados.length
-      ? explosivosOrdenados.join(" ")
-      : "—";
-
-    aplicarWarnMode("none");
-
-    renderRepuesto([], "none", false);
-
-    setTotalFichas(data.fichasTotal);
-
-    aplicarConteoDesdeBackend(
-      data.activeId,
-      data.activeMult
-    );
-
-    const show = !!data.aciertoShow;
-    const val  = Number(data.aciertoValue);
-
-    renderAcierto(show, val);
-
-    if(show){
-      sumarGananciaDesdeAcierto(val);
+    if(showFav || showRep){
       showWinFx(1200);
     }
 
-  } catch (err) {
+  }catch(err){
 
-    if (err && err.name === "AbortError") {
-
+    if(err && err.name === "AbortError"){
       alert("El servidor tardó demasiado y se cortó la petición.");
-
-    } else {
-
+    }else{
       alert("No conecta con el backend. ¿Está prendido?");
     }
   }
 });
-
-async function boot(){
+  async function boot(){
 
   if(booted) return;
 
@@ -1339,6 +1387,7 @@ async function boot(){
   if(TOKEN){
 
     mostrarSistema();
+
     await cargarEstado();
 
   }else{
@@ -1354,9 +1403,13 @@ async function boot(){
 
   setTimeout(() => {
 
-    if(splash) splash.style.display = "none";
+    if(splash){
+      splash.style.display = "none";
+    }
 
-    if(app) app.style.display = "block";
+    if(app){
+      app.style.display = "block";
+    }
 
     setOfflineWall();
 
