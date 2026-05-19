@@ -36,8 +36,8 @@ body::before{
 }
 
 h1{
-  color: white;
-  letter-spacing: 3px;
+  color:white;
+  letter-spacing:3px;
   text-shadow:
     0 0 6px #ffffff,
     0 0 12px #1e90ff,
@@ -138,7 +138,7 @@ h1{
   border-radius:8px;
   color:#00ff88;
   text-align:center;
-  text-shadow: 0 0 6px #00ff88;
+  text-shadow:0 0 6px #00ff88;
   outline:none;
 }
 
@@ -152,10 +152,10 @@ h1{
   font-size:28px;
   font-weight:bold;
 
-  background-image: url("./btn-neon-cian.png");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
+  background-image:url("./btn-neon-cian.png");
+  background-size:cover;
+  background-position:center;
+  background-repeat:no-repeat;
 
   border:none;
   color:#ffffff;
@@ -166,7 +166,7 @@ h1{
 
   border-radius:10px;
 
-  text-shadow: 0 2px 6px rgba(0,0,0,0.8);
+  text-shadow:0 2px 6px rgba(0,0,0,0.8);
 }
 
 .totalLabel{
@@ -182,10 +182,10 @@ h1{
   font-size:28px;
   font-weight:bold;
 
-  background-image: url("./btn-neon-gold.png");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
+  background-image:url("./btn-neon-gold.png");
+  background-size:cover;
+  background-position:center;
+  background-repeat:no-repeat;
 
   border:none;
   color:#ffffff;
@@ -196,7 +196,7 @@ h1{
 
   border-radius:10px;
 
-  text-shadow: 0 2px 6px rgba(0,0,0,0.85);
+  text-shadow:0 2px 6px rgba(0,0,0,0.85);
 }
 
 .gananciaLabel{
@@ -212,10 +212,10 @@ h1{
   font-size:36px;
   font-weight:bold;
 
-  background-image: url("./ficha-verde.png");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
+  background-image:url("./ficha-verde.png");
+  background-size:cover;
+  background-position:center;
+  background-repeat:no-repeat;
 
   border:none;
 
@@ -227,7 +227,7 @@ h1{
 
   border-radius:8px;
 
-  text-shadow: 0 1px 3px rgba(0,0,0,0.5);
+  text-shadow:0 1px 3px rgba(0,0,0,0.5);
 }
 
 .fichaLabel{
@@ -251,10 +251,10 @@ h1{
   font-size:46px;
   font-weight:bold;
 
-  background-image: url("./bg-acierto-blue.png");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
+  background-image:url("./bg-acierto-blue.png");
+  background-size:cover;
+  background-position:center;
+  background-repeat:no-repeat;
 
   border:none;
 
@@ -266,9 +266,9 @@ h1{
 
   border-radius:10px;
 
-  text-shadow: 0 0 8px #00e5ff;
+  text-shadow:0 0 8px #00e5ff;
 
-  animation: pulsoAcierto 4s ease-in-out infinite;
+  animation:pulsoAcierto 4s ease-in-out infinite;
 }
 
 .aciertoLabel{
@@ -279,27 +279,36 @@ h1{
   display:none;
 }
 
-.box{
+.repBox{
   width:320px;
   min-height:60px;
+
   margin:10px auto;
+
   border:6px solid #444;
+
   font-weight:bold;
+
   padding:10px;
+
+  color:#fff;
+
+  font-size:42px;
 }
 
-.favoritosBox{
-  background:#0b1a2a;
-  color:#ffffff;
-  font-size:42px;
-  border:3px solid #00e5ff;
+.rep2{
+  background:#13253f;
+  border-color:#00e5ff;
 }
 
-.repetidosBox{
-  background:#2b0f14;
-  color:#ffffff;
-  font-size:42px;
-  border:3px solid #ff00ff;
+.rep3{
+  background:#2d163c;
+  border-color:#ff00ff;
+}
+
+.rep4{
+  background:#3b150e;
+  border-color:#ff5500;
   }
   button{
   padding:10px;
@@ -476,6 +485,7 @@ h1{
   <div id="splash"></div>
 
 <div id="offlineWall">
+
   <div class="offlineCard">
 
     <div class="offlineTitle">
@@ -492,6 +502,7 @@ h1{
     </button>
 
   </div>
+
 </div>
 
 <div id="appContent">
@@ -525,183 +536,266 @@ h1{
   <div class="ingreso">
 
     <div class="ingresoCol">
+
       <input id="nuevo" class="ingresoInput">
+
       <div class="label" style="color:#00ff88;">
         INGRESO
       </div>
-    </div>
-
-    <div class="ingresoCol">
-
-      <div id="totalFavoritos" class="totalBox">0</div>
-
-      <div class="totalLabel">
-        TOTAL FAVORITOS
-      </div>
-
-      <div id="fichaFavoritos" class="fichaBox">1</div>
-
-      <div class="fichaLabel">
-        FICHA FAVORITOS
-      </div>
-
-    </div>
-
-    <div class="ingresoCol">
-
-      <div id="gananciaFavoritos" class="gananciaBox">0</div>
-
-      <div class="gananciaLabel">
-        GANANCIA FAVORITOS
-      </div>
-
-      <div class="aciertoWrap">
-
-        <div id="aciertoFavoritos" class="aciertoBox">
-          0
-        </div>
-
-        <div id="aciertoFavoritosLabel" class="aciertoLabel">
-          ACIERTO
-        </div>
-
-      </div>
-
-    </div>
-
-  </div>
-    <br>
-  <br>
-
-  <!-- =========================
-       REPETIDOS
-  ========================== -->
-
-  <div class="ingreso">
-
-    <div class="ingresoCol">
-
-      <div id="repetidosBox" class="box repetidosBox">
-        —
-      </div>
-
-      <div class="label" style="color:#ff00ff;">
-        REPETIDOS
-      </div>
-
-    </div>
-
-    <div class="ingresoCol">
-
-      <div id="totalRepetidos" class="totalBox">
-        0
-      </div>
-
-      <div class="totalLabel">
-        TOTAL REPETIDOS
-      </div>
-
-      <div id="fichaRepetidos" class="fichaBox">
-        1
-      </div>
-
-      <div class="fichaLabel">
-        FICHA REPETIDOS
-      </div>
-
-    </div>
-
-    <div class="ingresoCol">
-
-      <div id="gananciaRepetidos" class="gananciaBox">
-        0
-      </div>
-
-      <div class="gananciaLabel">
-        GANANCIA REPETIDOS
-      </div>
-
-      <div class="aciertoWrap">
-
-        <div id="aciertoRepetidos" class="aciertoBox">
-          0
-        </div>
-
-        <div id="aciertoRepetidosLabel" class="aciertoLabel">
-          ACIERTO
-        </div>
-
-      </div>
 
     </div>
 
   </div>
 
   <br>
-
   <!-- =========================
-       FAVORITOS
-  ========================== -->
+     REP2
+========================= -->
 
-  <div id="favoritosBox" class="box favoritosBox">
-    —
-  </div>
+<div class="repBox rep2" id="rep2Box">
+  —
+</div>
 
-  <div class="label" style="color:#00e5ff;font-size:26px;">
-    FAVORITOS
-  </div>
+<div class="label" style="color:#00e5ff;font-size:24px;">
+  REPETIDOS 2
+</div>
 
-  <div id="winFx">
+<div class="ingreso">
 
-    <dotlottie-player
-      id="winPlayer"
-      src="./success-cav.lottie"
-      background="transparent"
-      speed="1"
-      loop="false"
-      autoplay="false">
-    </dotlottie-player>
+  <div class="ingresoCol">
 
-  </div>
-
-  <div style="margin-top:12px;">
-    <button onclick="resetear()">REINICIAR</button>
-  </div>
-    <div id="adminPanel" class="adminPanel hidden">
-
-    <div class="adminTitle">
-      CREAR USUARIO (CON VENCIMIENTO)
+    <div id="totalRep2" class="totalBox">
+      0
     </div>
 
-    <div class="adminGrid">
-
-      <input id="newUser" placeholder="Usuario">
-
-      <input id="newPass" placeholder="Clave">
-
-    </div>
-
-    <div class="adminBtns">
-
-      <button onclick="crearUsuario(1)">1 DÍA</button>
-
-      <button onclick="crearUsuario(7)">7 DÍAS</button>
-
-      <button onclick="crearUsuario(30)">30 DÍAS</button>
-
-    </div>
-
-    <div id="adminOut" class="adminOut"></div>
-
-    <div class="smallNote">
-      Se guarda en el servidor (backend).
+    <div class="totalLabel">
+      TOTAL REP2
     </div>
 
   </div>
 
-  <button class="logoutBtn" onclick="salir()">
-    SALIR
-  </button>
+  <div class="ingresoCol">
+
+    <div id="fichaRep2" class="fichaBox">
+      1
+    </div>
+
+    <div class="fichaLabel">
+      FICHA REP2
+    </div>
+
+  </div>
+
+  <div class="ingresoCol">
+
+    <div id="gananciaRep2" class="gananciaBox">
+      0
+    </div>
+
+    <div class="gananciaLabel">
+      GANANCIA REP2
+    </div>
+
+    <div class="aciertoWrap">
+
+      <div id="aciertoRep2" class="aciertoBox">
+        0
+      </div>
+
+      <div id="aciertoRep2Label" class="aciertoLabel">
+        ACIERTO
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+<br>
+<br>
+
+<!-- =========================
+     REP3
+========================= -->
+
+<div class="repBox rep3" id="rep3Box">
+  —
+</div>
+
+<div class="label" style="color:#ff00ff;font-size:24px;">
+  REPETIDOS 3
+</div>
+
+<div class="ingreso">
+
+  <div class="ingresoCol">
+
+    <div id="totalRep3" class="totalBox">
+      0
+    </div>
+
+    <div class="totalLabel">
+      TOTAL REP3
+    </div>
+
+  </div>
+
+  <div class="ingresoCol">
+
+    <div id="fichaRep3" class="fichaBox">
+      1
+    </div>
+
+    <div class="fichaLabel">
+      FICHA REP3
+    </div>
+
+  </div>
+
+  <div class="ingresoCol">
+
+    <div id="gananciaRep3" class="gananciaBox">
+      0
+    </div>
+
+    <div class="gananciaLabel">
+      GANANCIA REP3
+    </div>
+
+    <div class="aciertoWrap">
+
+      <div id="aciertoRep3" class="aciertoBox">
+        0
+      </div>
+
+      <div id="aciertoRep3Label" class="aciertoLabel">
+        ACIERTO
+      </div>
+
+    </div>
+
+  </div>
+
+        </div>
+        <br>
+<br>
+
+<!-- =========================
+     REP4+
+========================= -->
+
+<div class="repBox rep4" id="rep4Box">
+  —
+</div>
+
+<div class="label" style="color:#ff5500;font-size:24px;">
+  REPETIDOS 4+
+</div>
+
+<div class="ingreso">
+
+  <div class="ingresoCol">
+
+    <div id="totalRep4" class="totalBox">
+      0
+    </div>
+
+    <div class="totalLabel">
+      TOTAL REP4+
+    </div>
+
+  </div>
+
+  <div class="ingresoCol">
+
+    <div id="fichaRep4" class="fichaBox">
+      1
+    </div>
+
+    <div class="fichaLabel">
+      FICHA REP4+
+    </div>
+
+  </div>
+
+  <div class="ingresoCol">
+
+    <div id="gananciaRep4" class="gananciaBox">
+      0
+    </div>
+
+    <div class="gananciaLabel">
+      GANANCIA REP4+
+    </div>
+
+    <div class="aciertoWrap">
+
+      <div id="aciertoRep4" class="aciertoBox">
+        0
+      </div>
+
+      <div id="aciertoRep4Label" class="aciertoLabel">
+        ACIERTO
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+<div id="winFx">
+
+  <dotlottie-player
+    id="winPlayer"
+    src="./success-cav.lottie"
+    background="transparent"
+    speed="1"
+    loop="false"
+    autoplay="false">
+  </dotlottie-player>
+
+</div>
+
+<div style="margin-top:12px;">
+  <button onclick="resetear()">REINICIAR</button>
+</div>
+<div id="adminPanel" class="adminPanel hidden">
+
+  <div class="adminTitle">
+    CREAR USUARIO (CON VENCIMIENTO)
+  </div>
+
+  <div class="adminGrid">
+
+    <input id="newUser" placeholder="Usuario">
+
+    <input id="newPass" placeholder="Clave">
+
+  </div>
+
+  <div class="adminBtns">
+
+    <button onclick="crearUsuario(1)">1 DÍA</button>
+
+    <button onclick="crearUsuario(7)">7 DÍAS</button>
+
+    <button onclick="crearUsuario(30)">30 DÍAS</button>
+
+  </div>
+
+  <div id="adminOut" class="adminOut"></div>
+
+  <div class="smallNote">
+    Se guarda en el servidor (backend).
+  </div>
+
+</div>
+
+<button class="logoutBtn" onclick="salir()">
+  SALIR
+</button>
 
 </div>
 
@@ -768,66 +862,55 @@ function showWinFx(ms = 1200){
 }
 
 /* =========================
-   GANANCIAS LOCALES
+   GANANCIAS
 ========================= */
 
-const GANANCIA_FAVORITOS_KEY = "S77_GANANCIA_FAVORITOS_V1";
-const GANANCIA_REPETIDOS_KEY = "S77_GANANCIA_REPETIDOS_V1";
+const G2 = "S77_GANANCIA_REP2";
+const G3 = "S77_GANANCIA_REP3";
+const G4 = "S77_GANANCIA_REP4";
 
-let gananciaFavoritosAcum = Number(
-  localStorage.getItem(GANANCIA_FAVORITOS_KEY) || 0
-);
+let ganRep2 = Number(localStorage.getItem(G2) || 0);
+let ganRep3 = Number(localStorage.getItem(G3) || 0);
+let ganRep4 = Number(localStorage.getItem(G4) || 0);
 
-let gananciaRepetidosAcum = Number(
-  localStorage.getItem(GANANCIA_REPETIDOS_KEY) || 0
-);
+if(!Number.isFinite(ganRep2)) ganRep2 = 0;
+if(!Number.isFinite(ganRep3)) ganRep3 = 0;
+if(!Number.isFinite(ganRep4)) ganRep4 = 0;
 
-if(!Number.isFinite(gananciaFavoritosAcum)){
-  gananciaFavoritosAcum = 0;
+function setGanRep2(v){
+
+  ganRep2 = Number(v) || 0;
+
+  gananciaRep2.textContent = Math.round(ganRep2);
+
+  localStorage.setItem(G2, String(ganRep2));
 }
 
-if(!Number.isFinite(gananciaRepetidosAcum)){
-  gananciaRepetidosAcum = 0;
+function setGanRep3(v){
+
+  ganRep3 = Number(v) || 0;
+
+  gananciaRep3.textContent = Math.round(ganRep3);
+
+  localStorage.setItem(G3, String(ganRep3));
 }
 
-function setGananciaFavoritos(v){
+function setGanRep4(v){
 
-  const n = Number(v);
+  ganRep4 = Number(v) || 0;
 
-  gananciaFavoritosAcum = Number.isFinite(n) ? n : 0;
+  gananciaRep4.textContent = Math.round(ganRep4);
 
-  gananciaFavoritos.textContent = String(
-    Math.round(gananciaFavoritosAcum)
-  );
-
-  localStorage.setItem(
-    GANANCIA_FAVORITOS_KEY,
-    String(gananciaFavoritosAcum)
-  );
+  localStorage.setItem(G4, String(ganRep4));
 }
 
-function setGananciaRepetidos(v){
+setGanRep2(ganRep2);
+setGanRep3(ganRep3);
+setGanRep4(ganRep4);
+  function renderAcierto(idBox, idLabel, show, value){
 
-  const n = Number(v);
-
-  gananciaRepetidosAcum = Number.isFinite(n) ? n : 0;
-
-  gananciaRepetidos.textContent = String(
-    Math.round(gananciaRepetidosAcum)
-  );
-
-  localStorage.setItem(
-    GANANCIA_REPETIDOS_KEY,
-    String(gananciaRepetidosAcum)
-  );
-}
-
-setGananciaFavoritos(gananciaFavoritosAcum);
-setGananciaRepetidos(gananciaRepetidosAcum);
-  function renderAciertoFavoritos(show, value){
-
-  const box = document.getElementById("aciertoFavoritos");
-  const lab = document.getElementById("aciertoFavoritosLabel");
+  const box = document.getElementById(idBox);
+  const lab = document.getElementById(idLabel);
 
   if(!box || !lab) return;
 
@@ -845,79 +928,61 @@ setGananciaRepetidos(gananciaRepetidosAcum);
   }
 }
 
-function renderAciertoRepetidos(show, value){
-
-  const box = document.getElementById("aciertoRepetidos");
-  const lab = document.getElementById("aciertoRepetidosLabel");
-
-  if(!box || !lab) return;
-
-  if(show){
-
-    box.style.display = "flex";
-    lab.style.display = "block";
-    box.textContent = String(Math.round(Number(value) || 0));
-
-  }else{
-
-    box.style.display = "none";
-    lab.style.display = "none";
-    box.textContent = "0";
-  }
-}
-
-function sumarGananciaFavoritos(value){
-
+function sumarGanRep2(value){
   const n = Number(value);
-
   if(!Number.isFinite(n)) return;
-
-  setGananciaFavoritos(gananciaFavoritosAcum + n);
+  setGanRep2(ganRep2 + n);
 }
 
-function sumarGananciaRepetidos(value){
-
+function sumarGanRep3(value){
   const n = Number(value);
-
   if(!Number.isFinite(n)) return;
-
-  setGananciaRepetidos(gananciaRepetidosAcum + n);
+  setGanRep3(ganRep3 + n);
 }
 
-function setTotalFavoritos(v){
+function sumarGanRep4(value){
+  const n = Number(value);
+  if(!Number.isFinite(n)) return;
+  setGanRep4(ganRep4 + n);
+}
 
+function setTotal(id, v){
+
+  const el = document.getElementById(id);
   const n = Number(v);
 
-  totalFavoritos.textContent = Number.isFinite(n)
+  if(!el) return;
+
+  el.textContent = Number.isFinite(n)
     ? String(Math.round(n))
     : "0";
 }
 
-function setTotalRepetidos(v){
+function setFicha(id, v){
 
+  const el = document.getElementById(id);
   const n = Number(v);
 
-  totalRepetidos.textContent = Number.isFinite(n)
-    ? String(Math.round(n))
-    : "0";
-}
+  if(!el) return;
 
-function setFichaFavoritos(v){
-
-  const n = Number(v);
-
-  fichaFavoritos.textContent = Number.isFinite(n)
+  el.textContent = Number.isFinite(n)
     ? String(Math.round(n))
     : "1";
 }
 
-function setFichaRepetidos(v){
+function renderLista(id, arr){
 
-  const n = Number(v);
+  const el = document.getElementById(id);
 
-  fichaRepetidos.textContent = Number.isFinite(n)
-    ? String(Math.round(n))
-    : "1";
+  if(!el) return;
+
+  const clean = Array.isArray(arr)
+    ? [...arr].sort((a,b)=>Number(a)-Number(b))
+    : [];
+
+  el.textContent = clean.length
+    ? clean.join(" ")
+    : "—";
   }
   const NUM_BG = {
   0:"#0b7a3b",
@@ -963,17 +1028,6 @@ function validarNumero(n){
     ok:true,
     msg:""
   };
-}
-
-function renderLista(el, arr){
-
-  const clean = Array.isArray(arr)
-    ? [...arr].sort((a,b)=>Number(a)-Number(b))
-    : [];
-
-  el.textContent = clean.length
-    ? clean.join(" ")
-    : "—";
   }
   async function crearUsuario(dias){
 
@@ -1187,17 +1241,21 @@ function renderEstado(data){
 
   renderCasilleros(data);
 
-  renderLista(favoritosBox, data.favoritos);
-  renderLista(repetidosBox, data.repetidos || data.explosivos);
+  renderLista("rep2Box", data.rep2);
+  renderLista("rep3Box", data.rep3);
+  renderLista("rep4Box", data.rep4);
 
-  setTotalFavoritos(data.fichasTotalFavoritos);
-  setTotalRepetidos(data.fichasTotalRepetidos);
+  setTotal("totalRep2", data.totalRep2);
+  setTotal("totalRep3", data.totalRep3);
+  setTotal("totalRep4", data.totalRep4);
 
-  setFichaFavoritos(data.activeMultFavoritos);
-  setFichaRepetidos(data.activeMultRepetidos);
+  setFicha("fichaRep2", data.multRep2);
+  setFicha("fichaRep3", data.multRep3);
+  setFicha("fichaRep4", data.multRep4);
 
-  renderAciertoFavoritos(false, 0);
-  renderAciertoRepetidos(false, 0);
+  renderAcierto("aciertoRep2", "aciertoRep2Label", false, 0);
+  renderAcierto("aciertoRep3", "aciertoRep3Label", false, 0);
+  renderAcierto("aciertoRep4", "aciertoRep4Label", false, 0);
 }
 
 async function cargarEstado(){
@@ -1261,20 +1319,25 @@ async function cargarEstado(){
       return;
     }
 
-    setTotalFavoritos(0);
-    setTotalRepetidos(0);
+    setTotal("totalRep2", 0);
+    setTotal("totalRep3", 0);
+    setTotal("totalRep4", 0);
 
-    setFichaFavoritos(1);
-    setFichaRepetidos(1);
+    setFicha("fichaRep2", 1);
+    setFicha("fichaRep3", 1);
+    setFicha("fichaRep4", 1);
 
-    setGananciaFavoritos(0);
-    setGananciaRepetidos(0);
+    setGanRep2(0);
+    setGanRep3(0);
+    setGanRep4(0);
 
-    renderAciertoFavoritos(false, 0);
-    renderAciertoRepetidos(false, 0);
+    renderLista("rep2Box", []);
+    renderLista("rep3Box", []);
+    renderLista("rep4Box", []);
 
-    renderLista(favoritosBox, []);
-    renderLista(repetidosBox, []);
+    renderAcierto("aciertoRep2", "aciertoRep2Label", false, 0);
+    renderAcierto("aciertoRep3", "aciertoRep3Label", false, 0);
+    renderAcierto("aciertoRep4", "aciertoRep4Label", false, 0);
 
     const fx = document.getElementById("winFx");
 
@@ -1292,9 +1355,8 @@ async function cargarEstado(){
       alert("No conecta con el backend.");
     }
   }
-}
-
-nuevo.addEventListener("keydown", async (e) => {
+  }
+  nuevo.addEventListener("keydown", async (e) => {
 
   if(e.key !== "Enter") return;
 
@@ -1343,24 +1405,32 @@ nuevo.addEventListener("keydown", async (e) => {
 
     renderEstado(data);
 
-    const showFav = !!data.aciertoShowFavoritos;
-    const valFav  = Number(data.aciertoValueFavoritos);
+    const show2 = !!data.aciertoShowRep2;
+    const val2  = Number(data.aciertoValueRep2);
 
-    const showRep = !!data.aciertoShowRepetidos;
-    const valRep  = Number(data.aciertoValueRepetidos);
+    const show3 = !!data.aciertoShowRep3;
+    const val3  = Number(data.aciertoValueRep3);
 
-    renderAciertoFavoritos(showFav, valFav);
-    renderAciertoRepetidos(showRep, valRep);
+    const show4 = !!data.aciertoShowRep4;
+    const val4  = Number(data.aciertoValueRep4);
 
-    if(showFav){
-      sumarGananciaFavoritos(valFav);
+    renderAcierto("aciertoRep2", "aciertoRep2Label", show2, val2);
+    renderAcierto("aciertoRep3", "aciertoRep3Label", show3, val3);
+    renderAcierto("aciertoRep4", "aciertoRep4Label", show4, val4);
+
+    if(show2){
+      sumarGanRep2(val2);
     }
 
-    if(showRep){
-      sumarGananciaRepetidos(valRep);
+    if(show3){
+      sumarGanRep3(val3);
     }
 
-    if(showFav || showRep){
+    if(show4){
+      sumarGanRep4(val4);
+    }
+
+    if(show2 || show3 || show4){
       showWinFx(1200);
     }
 
