@@ -1108,45 +1108,6 @@ function renderEstado(data){
   }catch(e){}
 }
 
-  const valor = parseInt(valorFichaInput.value, 10);
-
-  if(!Number.isInteger(valor) || valor <= 0){
-    alert("Ingresá un valor de ficha válido.");
-    return;
-  }
-
-  try{
-
-    const r = await fetchWithTimeout(`${API}/api/valor-ficha`,{
-
-      method:"POST",
-
-      headers:{
-        "Content-Type":"application/json",
-        "Authorization": `Bearer ${TOKEN}`
-      },
-
-      body: JSON.stringify({
-        valorFicha: valor
-      })
-
-    }, 12000);
-
-    const data = await r.json();
-
-    if(!r.ok){
-      alert("No se pudo guardar el valor de ficha.");
-      return;
-    }
-
-    renderValorFicha(data.valorFicha, data.valorFichaLocked);
-
-  }catch(e){
-
-    alert("No conecta con el backend.");
-  }
-}
-
 async function resetear(){
 
   if(!TOKEN){
