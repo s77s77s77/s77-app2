@@ -700,12 +700,6 @@ function aplicarValorFichaUI(data){
   }
 }
 
-async function guardarValorFicha(){
-
-  if(!TOKEN){
-    alert("Tenés que estar logueado.");
-    return;
-  }
 
   const input = document.getElementById("valorFichaInput");
 
@@ -1113,13 +1107,6 @@ function renderEstado(data){
   }catch(e){}
 }
 
-async function guardarValorFicha(){
-
-  if(!TOKEN){
-    alert("Tenés que estar logueado.");
-    return;
-  }
-
   const valor = parseInt(valorFichaInput.value, 10);
 
   if(!Number.isInteger(valor) || valor <= 0){
@@ -1186,7 +1173,10 @@ async function resetear(){
     }
 
     setTotal(0);
-    setFicha(1);
+    setFicha({
+  fichasTotal: 1,
+  valorFicha: valorFichaActual
+});
     setGanancia(0);
 
     renderLista("favoritosBox", []);
