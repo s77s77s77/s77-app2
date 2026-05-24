@@ -460,3 +460,321 @@ button{
 <div id="appContent">
 
 <h1>SISTEMA UNICO PREMIUM</h1>
+<div id="login" class="loginBox">
+
+  <div class="loginRow">
+    <input id="usuario" class="loginInput" placeholder="Usuario">
+  </div>
+
+  <div class="loginRow">
+    <input id="clave" class="loginInput" placeholder="Clave" type="password">
+  </div>
+
+  <div class="loginRow">
+    <button onclick="ingresar()">INGRESAR</button>
+  </div>
+
+  <p id="err" style="color:red;margin:6px 0 0;"></p>
+
+</div>
+
+<div id="sistema" class="hidden">
+
+  <div class="inputs" id="casilleros"></div>
+
+  <br>
+
+  <div class="ingreso">
+
+    <div class="ingresoCol">
+
+      <input id="nuevo" class="ingresoInput">
+
+      <div class="label" style="color:#00ff88;">
+        INGRESO
+      </div>
+
+    </div>
+
+  </div>
+
+  <br>
+
+<!-- =========================
+     FAVORITOS / REP3
+========================= -->
+
+<div class="repBox favoritosBox" id="favoritosBox">
+  —
+</div>
+
+<div class="label" style="color:#00e5ff;font-size:26px;">
+  FAVORITOS
+</div>
+
+<br>
+
+<!-- =========================
+     ON FIRE / REP4+
+========================= -->
+
+<div class="repBox onfireBox" id="onfireBox">
+  —
+</div>
+
+<div class="label" style="color:#ff5500;font-size:26px;">
+  ON FIRE
+</div>
+
+<br>
+<br>
+
+<div class="ingreso">
+
+  <div class="ingresoCol">
+
+    <div id="totalGeneral" class="totalBox">
+      0
+    </div>
+
+    <div class="totalLabel">
+      TOTAL
+    </div>
+
+  </div>
+
+  <div class="ingresoCol">
+
+    <div id="fichaGeneral" class="fichaBox">
+      1
+    </div>
+
+    <div class="fichaLabel">
+      FICHA
+    </div>
+
+  </div>
+
+  <div class="ingresoCol">
+
+    <div id="gananciaGeneral" class="gananciaBox">
+      0
+    </div>
+
+    <div class="gananciaLabel">
+      GANANCIA
+    </div>
+
+    <div class="aciertoWrap">
+
+      <div id="aciertoBox" class="aciertoBox">
+        0
+      </div>
+
+      <div id="aciertoLabel" class="aciertoLabel">
+        ACIERTO
+      </div>
+
+    </div>
+
+  </div>
+
+  </div>
+  <!-- =========================
+     VALOR DE FICHA + REINICIAR
+========================= -->
+
+<div class="resetValorWrap">
+
+  <div class="valorCol">
+
+    <input
+      id="valorFichaInput"
+      class="valorInput"
+      type="number"
+      min="1"
+      step="1"
+      placeholder="100"
+    >
+
+    <div id="valorLabel" class="valorLabel">
+      VALOR
+    </div>
+
+    <button id="valorOkBtn" class="valorOkBtn" onclick="guardarValorFicha()">
+      OK
+    </button>
+
+  </div>
+
+  <div class="reiniciarCol">
+
+    <button onclick="resetear()">
+      REINICIAR
+    </button>
+
+  </div>
+
+</div>
+
+<div id="winFx">
+
+  <dotlottie-player
+    id="winPlayer"
+    src="./success-cav.lottie"
+    background="transparent"
+    speed="1"
+    loop="false"
+    autoplay="false">
+  </dotlottie-player>
+
+</div>
+
+<button class="logoutBtn" onclick="salir()">
+  SALIR
+</button>
+
+</div>
+
+</div>
+
+<script>
+
+const API = "https://s77-backend2.onrender.com";
+
+const TOKEN_KEY = "S77_TOKEN_V1";
+const ROLE_KEY  = "S77_ROLE_V1";
+
+let TOKEN = localStorage.getItem(TOKEN_KEY) || "";
+let ROLE  = localStorage.getItem(ROLE_KEY) || "";
+
+let booted = false;
+let winFxTimer = null;
+
+function fetchWithTimeout(url, options = {}, timeoutMs = 12000){
+
+  const controller = new AbortController();
+
+  const id = setTimeout(
+    () => controller.abort(),
+    timeoutMs
+  );
+
+  return fetch(url, {
+    ...options,
+    signal: controller.signal
+  }).finally(() => clearTimeout(id));
+}
+  /* =========================
+   VALOR DE FICHA
+========================= */
+
+let valorFichaActual = 1;
+let valorFichaBloqueado = false;
+
+function aplicarValorFichaUI(data){
+
+  const input = document.getElementById("valorFichaInput");
+  const label = document.getElementById("valorLabel");
+  const btn = document.getElementById("valorOkBtn");
+
+  const valor = Number(data?.valorFicha);
+
+  valorFichaActual = Number.isFinite(valor) && valor > 0
+    ? valor
+    : 1;
+
+  valorFichaBloqueado = !!data?.valorFichaBloqueado;
+
+  if(input){
+    input.value = String(valorFichaActual);
+    input.disabled = valorFichaBloqueado;
+  }
+
+  if(label){
+    label.style.display = valorFichaBloqueado ? "none" : "block";
+  }
+
+  if(btn){
+    btn.style.display = valorFichaBloqueado ? "none" : "inline-block";
+  }
+}
+
+async function guardarValorFicha(){
+
+  if(!TOKEN){
+    alert("Tenés que estar logueado.");
+    return;
+  }
+
+  const input = document.getElementById("valorFichaInput");
+
+  const valor = Number(input?.value);
+
+  if(!Number.isFinite(valor) || valor <= 0){
+    alert("Ingresá un valor de ficha válido.");
+    return;
+  }
+
+  if(!Number.isInteger(valor)){
+    alert("El valor de ficha debe ser un número entero.");
+    return;
+  }
+
+  try{
+
+    const r = await fetchWithTimeout(`${API}/api/set-valor-ficha`,{
+
+      method:"POST",
+
+      headers:{
+        "Content-Type":"application/json",
+        "Authorization": `Bearer ${TOKEN}`
+      },
+
+      body: JSON.stringify({
+        valorFicha: valor
+      })
+
+    }, 12000);
+
+    const data = await r.json();
+
+    if(!r.ok){
+      alert("No se pudo guardar el valor.");
+      return;
+    }
+
+    aplicarValorFichaUI(data);
+
+  }catch(e){
+
+    alert("No conecta con el backend.");
+  }
+}
+
+/* =========================
+   EFECTO ACIERTO
+========================= */
+
+function showWinFx(ms = 1200){
+
+  const fx = document.getElementById("winFx");
+  const player = document.getElementById("winPlayer");
+
+  if(!fx || !player) return;
+
+  fx.style.display = "flex";
+
+  try{
+    player.stop();
+    player.play();
+  }catch(e){}
+
+  clearTimeout(winFxTimer);
+
+  winFxTimer = setTimeout(() => {
+    fx.style.display = "none";
+  }, ms);
+  }
+  
