@@ -1087,4 +1087,233 @@ function renderEstado(data){
 
   renderAcierto(false, 0);
   }
-  
+  async function cargarEstado(){
+
+  try{
+
+    const r = await fetchWithTimeout(`${API}/api/state`,{
+
+      method:"GET",
+
+      headers:{
+        "Authorization": `Bearer ${TOKEN}`
+      }
+
+    }, 12000);
+
+    const data = await r.json();
+
+    if(!r.ok){
+      salir();
+      return;
+    }
+
+    renderEstado(data);
+
+  }catch(e){}
+}
+
+async function guardarValorFicha(){
+
+  if(!TOKEN){
+    alert("Tenés que estar logueado.");
+    return;
+  }
+
+  const valor = parseInt(valorFichaInput.value, 10);
+
+  if(!Number.isInteger(valor) || valor <= 0){
+    alert("Ingresá un valor de ficha válido.");
+    return;
+  }
+
+  try{
+
+    const r = await fetchWithTimeout(`${API}/api/valor-ficha`,{
+
+      method:"POST",
+
+      headers:{
+        "Content-Type":"application/json",
+        "Authorization": `Bearer ${TOKEN}`
+      },
+
+      body: JSON.stringify({
+        valorFicha: valor
+      })
+
+    }, 12000);
+
+    const data = await r.json();
+
+    if(!r.ok){
+      alert("No se pudo guardar el valor de ficha.");
+      return;
+    }
+
+    renderValorFicha(data.valorFicha, data.valorFichaLocked);
+
+  }catch(e){
+
+    alert("No conecta con el backend.");
+  }
+}
+
+async function resetear(){
+
+  if(!TOKEN){
+    alert("Tenés que estar logueado.");
+    return;
+  }
+
+  if(!confirm("¿Seguro querés reiniciar tu historial?")) return;
+
+  try{
+
+    const r = await fetchWithTimeout(`${API}/api/reset`,{
+
+      method:"POST",
+
+      headers:{
+        "Authorization": `Bearer ${TOKEN}`
+      }
+
+    }, 12000);
+
+    if(!r.ok){
+      alert("No se pudo reiniciar.");
+      return;
+    }
+
+    setTotal(0);
+    setFicha(1);
+    setGanancia(0);
+
+    renderLista("favoritosBox", []);
+    renderLista("onfireBox", []);
+
+    renderAcierto(false, 0);
+
+    const fx = document.getElementById("winFx");
+
+    if(fx){
+      fx.style.display = "none";
+    }
+
+    await cargarEstado();
+
+  }catch(e){
+
+    if(e && e.name === "AbortError"){
+      alert("El servidor tardó demasiado y se cortó la petición.");
+    }else{
+      alert("No conecta con el backend.");
+    }
+  }
+  }
+  nuevo.addEventListener("keydown", async (e) => {
+
+  if(e.key !== "Enter") return;
+
+  if(!TOKEN){
+    alert("Primero tenés que ingresar con usuario y clave.");
+    return;
+  }
+
+  const n = parseInt(nuevo.value, 10);
+
+  const v = validarNumero(n);
+
+  if(!v.ok){
+    alert(v.msg);
+    return;
+  }
+
+  nuevo.value = "";
+
+  try{
+
+    const r = await fetchWithTimeout(`${API}/api/enter`,{
+
+      method:"POST",
+
+      headers:{
+        "Content-Type":"application/json",
+        "Authorization": `Bearer ${TOKEN}`
+      },
+
+      body: JSON.stringify({ n })
+
+    }, 12000);
+
+    const data = await r.json();
+
+    if(!r.ok){
+      salir();
+      return;
+    }
+
+    renderEstado(data);
+
+    const show = !!data.aciertoShow;
+    const val  = Number(data.aciertoValue);
+
+    renderAcierto(show, val);
+
+    if(show){
+      sumarGanancia(val);
+      showWinFx(1200);
+    }
+
+  }catch(err){
+
+    if(err && err.name === "AbortError"){
+      alert("El servidor tardó demasiado y se cortó la petición.");
+    }else{
+      alert("No conecta con el backend. ¿Está prendido?");
+    }
+  }
+});
+
+async function boot(){
+
+  if(booted) return;
+
+  booted = true;
+
+  if(TOKEN){
+
+    mostrarSistema();
+
+    await cargarEstado();
+
+  }else{
+
+    mostrarLogin();
+  }
+}
+
+(async function init(){
+
+  const splash = document.getElementById("splash");
+  const app = document.getElementById("appContent");
+
+  setTimeout(() => {
+
+    if(splash){
+      splash.style.display = "none";
+    }
+
+    if(app){
+      app.style.display = "block";
+    }
+
+  }, 4000);
+
+  await boot();
+
+})();
+</script>
+
+</body>
+</html>
