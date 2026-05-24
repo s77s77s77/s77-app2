@@ -700,24 +700,24 @@ function aplicarValorFichaUI(data){
   }
 }
 
+async function guardarValorFicha(){
 
-  const input = document.getElementById("valorFichaInput");
-
-  const valor = Number(input?.value);
-
-  if(!Number.isFinite(valor) || valor <= 0){
-    alert("Ingresá un valor de ficha válido.");
+  if(!TOKEN){
+    alert("Tenés que estar logueado.");
     return;
   }
 
-  if(!Number.isInteger(valor)){
-    alert("El valor de ficha debe ser un número entero.");
+  const input = document.getElementById("valorFichaInput");
+  const valor = Number(input?.value);
+
+  if(!Number.isInteger(valor) || valor <= 0){
+    alert("Ingresá un valor de ficha válido.");
     return;
   }
 
   try{
 
-    const r = await fetchWithTimeout(`${API}/api/set-valor-ficha`,{
+    const r = await fetchWithTimeout(`${API}/api/valor-ficha`,{
 
       method:"POST",
 
@@ -735,18 +735,19 @@ function aplicarValorFichaUI(data){
     const data = await r.json();
 
     if(!r.ok){
-      alert("No se pudo guardar el valor.");
+      alert("No se pudo guardar el valor de ficha.");
       return;
     }
 
     aplicarValorFichaUI(data);
 
+    setFicha(data);
+
   }catch(e){
 
     alert("No conecta con el backend.");
   }
-}
-
+  }
 /* =========================
    EFECTO ACIERTO
 ========================= */
