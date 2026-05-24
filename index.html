@@ -130,20 +130,15 @@ h1{
   height:80px;
   font-size:36px;
   font-weight:bold;
-
   background-image:url("./bg-casino-green.png");
   background-size:cover;
   background-position:center;
   background-repeat:no-repeat;
-
   border:none;
   border-radius:8px;
-
   color:#00ff88;
   text-align:center;
-
   text-shadow:0 0 6px #00ff88;
-
   outline:none;
 }
 
@@ -151,20 +146,15 @@ h1{
   margin-top:0;
   font-weight:bold;
 }
-  .repBox{
+
+.repBox{
   width:340px;
   min-height:65px;
-
   margin:10px auto;
-
   border:6px solid #444;
-
   font-weight:bold;
-
   padding:10px;
-
   color:#fff;
-
   font-size:44px;
 }
 
@@ -181,25 +171,18 @@ h1{
 .totalBox{
   width:130px;
   height:80px;
-
   font-size:30px;
   font-weight:bold;
-
   background-image:url("./btn-neon-cian.png");
   background-size:cover;
   background-position:center;
   background-repeat:no-repeat;
-
   border:none;
-
   color:#ffffff;
-
   display:flex;
   align-items:center;
   justify-content:center;
-
   border-radius:10px;
-
   text-shadow:0 2px 6px rgba(0,0,0,0.8);
 }
 
@@ -213,25 +196,18 @@ h1{
 .fichaBox{
   width:85px;
   height:85px;
-
   font-size:38px;
   font-weight:bold;
-
   background-image:url("./ficha-verde.png");
   background-size:cover;
   background-position:center;
   background-repeat:no-repeat;
-
   border:none;
-
   color:#000;
-
   display:flex;
   align-items:center;
   justify-content:center;
-
   border-radius:8px;
-
   text-shadow:0 1px 3px rgba(0,0,0,0.5);
 }
 
@@ -245,25 +221,18 @@ h1{
 .gananciaBox{
   width:130px;
   height:80px;
-
   font-size:30px;
   font-weight:bold;
-
   background-image:url("./btn-neon-gold.png");
   background-size:cover;
   background-position:center;
   background-repeat:no-repeat;
-
   border:none;
-
   color:#ffffff;
-
   display:flex;
   align-items:center;
   justify-content:center;
-
   border-radius:10px;
-
   text-shadow:0 2px 6px rgba(0,0,0,0.85);
 }
 
@@ -285,27 +254,19 @@ h1{
 .aciertoBox{
   width:90px;
   height:90px;
-
   font-size:48px;
   font-weight:bold;
-
   background-image:url("./bg-acierto-blue.png");
   background-size:cover;
   background-position:center;
   background-repeat:no-repeat;
-
   border:none;
-
   color:#ffffff;
-
   display:none;
   align-items:center;
   justify-content:center;
-
   border-radius:10px;
-
   text-shadow:0 0 8px #00e5ff;
-
   animation:pulsoAcierto 4s ease-in-out infinite;
 }
 
@@ -315,17 +276,19 @@ h1{
   color:#00e5ff;
   text-shadow:0 0 6px #00e5ff;
   display:none;
-  }
-  .valorWrap{
+}
+
+.resetValorWrap{
   display:flex;
   justify-content:center;
   align-items:flex-start;
-  gap:10px;
-  margin-top:12px;
+  gap:18px;
+  margin-top:16px;
   flex-wrap:wrap;
 }
 
-.valorCol{
+.valorCol,
+.reiniciarCol{
   display:flex;
   flex-direction:column;
   align-items:center;
@@ -335,19 +298,14 @@ h1{
 .valorInput{
   width:95px;
   height:58px;
-
   font-size:26px;
   font-weight:bold;
-
   background:#050505;
   color:#00ff88;
-
   border:3px solid #00ff88;
   border-radius:10px;
-
   text-align:center;
   outline:none;
-
   text-shadow:0 0 6px #00ff88;
   box-shadow:
     0 0 8px rgba(0,255,136,0.55),
@@ -368,8 +326,8 @@ h1{
   text-shadow:0 0 6px #00ff88;
 }
 
-.valorBtn{
-  height:58px;
+.valorOkBtn{
+  height:38px;
   padding:0 14px;
   background:#0b3b24;
   color:#ffffff;
@@ -424,9 +382,7 @@ button{
   position:fixed;
   inset:0;
   z-index:99999;
-
   background:#000;
-
   background-image:url("./splash.png");
   background-size:cover;
   background-position:center;
@@ -460,6 +416,7 @@ button{
 <div id="appContent">
 
 <h1>SISTEMA UNICO PREMIUM</h1>
+
 <div id="login" class="loginBox">
 
   <div class="loginRow">
@@ -485,154 +442,86 @@ button{
   <br>
 
   <div class="ingreso">
-
     <div class="ingresoCol">
-
       <input id="nuevo" class="ingresoInput">
-
-      <div class="label" style="color:#00ff88;">
-        INGRESO
-      </div>
-
+      <div class="label" style="color:#00ff88;">INGRESO</div>
     </div>
-
   </div>
 
   <br>
 
-<!-- =========================
-     FAVORITOS / REP3
-========================= -->
+  <div class="repBox favoritosBox" id="favoritosBox">—</div>
+  <div class="label" style="color:#00e5ff;font-size:26px;">FAVORITOS</div>
 
-<div class="repBox favoritosBox" id="favoritosBox">
-  —
-</div>
+  <br>
 
-<div class="label" style="color:#00e5ff;font-size:26px;">
-  FAVORITOS
-</div>
+  <div class="repBox onfireBox" id="onfireBox">—</div>
+  <div class="label" style="color:#ff5500;font-size:26px;">ON FIRE</div>
 
-<br>
+  <br>
+  <br>
 
-<!-- =========================
-     ON FIRE / REP4+
-========================= -->
+  <div class="ingreso">
 
-<div class="repBox onfireBox" id="onfireBox">
-  —
-</div>
-
-<div class="label" style="color:#ff5500;font-size:26px;">
-  ON FIRE
-</div>
-
-<br>
-<br>
-
-<div class="ingreso">
-
-  <div class="ingresoCol">
-
-    <div id="totalGeneral" class="totalBox">
-      0
+    <div class="ingresoCol">
+      <div id="totalGeneral" class="totalBox">0</div>
+      <div class="totalLabel">TOTAL</div>
     </div>
 
-    <div class="totalLabel">
-      TOTAL
+    <div class="ingresoCol">
+      <div id="fichaGeneral" class="fichaBox">1</div>
+      <div class="fichaLabel">FICHA</div>
     </div>
 
-  </div>
+    <div class="ingresoCol">
+      <div id="gananciaGeneral" class="gananciaBox">0</div>
+      <div class="gananciaLabel">GANANCIA</div>
 
-  <div class="ingresoCol">
-
-    <div id="fichaGeneral" class="fichaBox">
-      1
-    </div>
-
-    <div class="fichaLabel">
-      FICHA
-    </div>
-
-  </div>
-
-  <div class="ingresoCol">
-
-    <div id="gananciaGeneral" class="gananciaBox">
-      0
-    </div>
-
-    <div class="gananciaLabel">
-      GANANCIA
-    </div>
-
-    <div class="aciertoWrap">
-
-      <div id="aciertoBox" class="aciertoBox">
-        0
+      <div class="aciertoWrap">
+        <div id="aciertoBox" class="aciertoBox">0</div>
+        <div id="aciertoLabel" class="aciertoLabel">ACIERTO</div>
       </div>
-
-      <div id="aciertoLabel" class="aciertoLabel">
-        ACIERTO
-      </div>
-
     </div>
 
   </div>
 
-  </div>
-  <!-- =========================
-     VALOR DE FICHA + REINICIAR
-========================= -->
+  <div class="resetValorWrap">
 
-<div class="resetValorWrap">
+    <div class="valorCol">
+      <input
+        id="valorFichaInput"
+        class="valorInput"
+        type="number"
+        min="1"
+        step="1"
+        placeholder="100"
+      >
 
-  <div class="valorCol">
+      <div id="valorLabel" class="valorLabel">VALOR</div>
 
-    <input
-      id="valorFichaInput"
-      class="valorInput"
-      type="number"
-      min="1"
-      step="1"
-      placeholder="100"
-    >
-
-    <div id="valorLabel" class="valorLabel">
-      VALOR
+      <button id="valorOkBtn" class="valorOkBtn" onclick="guardarValorFicha()">
+        OK
+      </button>
     </div>
 
-    <button id="valorOkBtn" class="valorOkBtn" onclick="guardarValorFicha()">
-      OK
-    </button>
+    <div class="reiniciarCol">
+      <button onclick="resetear()">REINICIAR</button>
+    </div>
 
   </div>
 
-  <div class="reiniciarCol">
-
-    <button onclick="resetear()">
-      REINICIAR
-    </button>
-
+  <div id="winFx">
+    <dotlottie-player
+      id="winPlayer"
+      src="./success-cav.lottie"
+      background="transparent"
+      speed="1"
+      loop="false"
+      autoplay="false">
+    </dotlottie-player>
   </div>
 
-</div>
-
-<div id="winFx">
-
-  <dotlottie-player
-    id="winPlayer"
-    src="./success-cav.lottie"
-    background="transparent"
-    speed="1"
-    loop="false"
-    autoplay="false">
-  </dotlottie-player>
-
-</div>
-
-<button class="logoutBtn" onclick="salir()">
-  SALIR
-</button>
+  <button class="logoutBtn" onclick="salir()">SALIR</button>
 
 </div>
 
@@ -651,6 +540,19 @@ let ROLE  = localStorage.getItem(ROLE_KEY) || "";
 let booted = false;
 let winFxTimer = null;
 
+let valorFichaActual = 1;
+let valorFichaBloqueado = false;
+
+const GANANCIA_KEY = "S77_GANANCIA_GENERAL_V1";
+
+let gananciaAcum = Number(
+  localStorage.getItem(GANANCIA_KEY) || 0
+);
+
+if(!Number.isFinite(gananciaAcum)){
+  gananciaAcum = 0;
+}
+
 function fetchWithTimeout(url, options = {}, timeoutMs = 12000){
 
   const controller = new AbortController();
@@ -665,12 +567,6 @@ function fetchWithTimeout(url, options = {}, timeoutMs = 12000){
     signal: controller.signal
   }).finally(() => clearTimeout(id));
 }
-  /* =========================
-   VALOR DE FICHA
-========================= */
-
-let valorFichaActual = 1;
-let valorFichaBloqueado = false;
 
 function aplicarValorFichaUI(data){
 
@@ -684,7 +580,9 @@ function aplicarValorFichaUI(data){
     ? valor
     : 1;
 
-  valorFichaBloqueado = !!data?.valorFichaBloqueado;
+  valorFichaBloqueado =
+    !!data?.valorFichaBloqueado ||
+    !!data?.valorFichaLocked;
 
   if(input){
     input.value = String(valorFichaActual);
@@ -740,17 +638,13 @@ async function guardarValorFicha(){
     }
 
     aplicarValorFichaUI(data);
-
     setFicha(data);
 
   }catch(e){
 
     alert("No conecta con el backend.");
   }
-  }
-/* =========================
-   EFECTO ACIERTO
-========================= */
+}
 
 function showWinFx(ms = 1200){
 
@@ -771,19 +665,6 @@ function showWinFx(ms = 1200){
   winFxTimer = setTimeout(() => {
     fx.style.display = "none";
   }, ms);
-  }
-  /* =========================
-   GANANCIA LOCAL
-========================= */
-
-const GANANCIA_KEY = "S77_GANANCIA_GENERAL_V1";
-
-let gananciaAcum = Number(
-  localStorage.getItem(GANANCIA_KEY) || 0
-);
-
-if(!Number.isFinite(gananciaAcum)){
-  gananciaAcum = 0;
 }
 
 function setGanancia(v){
@@ -797,8 +678,6 @@ function setGanancia(v){
     String(gananciaAcum)
   );
 }
-
-setGanancia(gananciaAcum);
 
 function sumarGanancia(value){
 
@@ -847,8 +726,9 @@ function setFicha(data){
   if(Number.isFinite(monto) && monto > 0){
     final = monto;
   }else{
-    final = (Number.isFinite(mult) && mult > 0 ? mult : 1) *
-            (Number.isFinite(valor) && valor > 0 ? valor : 1);
+    final =
+      (Number.isFinite(mult) && mult > 0 ? mult : 1) *
+      (Number.isFinite(valor) && valor > 0 ? valor : 1);
   }
 
   fichaGeneral.textContent = String(Math.round(final));
@@ -867,8 +747,9 @@ function renderLista(id, arr){
   el.textContent = clean.length
     ? clean.join(" ")
     : "—";
-  }
-  const NUM_BG = {
+}
+
+const NUM_BG = {
   0:"#0b7a3b",
   1:"#ff0000", 2:"#000000", 3:"#ff0000", 4:"#000000", 5:"#ff0000",
   6:"#000000", 7:"#ff0000", 8:"#000000", 9:"#ff0000", 10:"#000000",
@@ -964,8 +845,9 @@ async function ingresar(){
 
     err.innerText = "No conecta con el servidor. ¿Está prendido el backend?";
   }
-  }
-  function mostrarLogin(){
+}
+
+function mostrarLogin(){
 
   login.classList.remove("hidden");
   login.style.display = "inline-block";
@@ -984,8 +866,6 @@ function mostrarSistema(){
 }
 
 function salir(){
-
-  if(!confirm("¿Seguro querés salir?")) return;
 
   TOKEN = "";
   ROLE = "";
@@ -1064,15 +944,8 @@ function renderEstado(data){
 
   renderCasilleros(data);
 
-  renderLista(
-    "favoritosBox",
-    data.favoritos
-  );
-
-  renderLista(
-    "onfireBox",
-    data.onfire
-  );
+  renderLista("favoritosBox", data.favoritos);
+  renderLista("onfireBox", data.onfire);
 
   setTotal(data.totalGeneral);
 
@@ -1081,8 +954,9 @@ function renderEstado(data){
   setFicha(data);
 
   renderAcierto(false, 0);
-  }
-  async function cargarEstado(){
+}
+
+async function cargarEstado(){
 
   try{
 
@@ -1105,7 +979,9 @@ function renderEstado(data){
 
     renderEstado(data);
 
-  }catch(e){}
+  }catch(e){
+    alert("No conecta con el backend al cargar estado.");
+  }
 }
 
 async function resetear(){
@@ -1135,10 +1011,7 @@ async function resetear(){
     }
 
     setTotal(0);
-    setFicha({
-  fichasTotal: 1,
-  valorFicha: valorFichaActual
-});
+
     setGanancia(0);
 
     renderLista("favoritosBox", []);
@@ -1162,8 +1035,9 @@ async function resetear(){
       alert("No conecta con el backend.");
     }
   }
-  }
-  nuevo.addEventListener("keydown", async (e) => {
+}
+
+nuevo.addEventListener("keydown", async (e) => {
 
   if(e.key !== "Enter") return;
 
@@ -1248,24 +1122,4 @@ async function boot(){
 (async function init(){
 
   const splash = document.getElementById("splash");
-  const app = document.getElementById("appContent");
-
-  setTimeout(() => {
-
-    if(splash){
-      splash.style.display = "none";
-    }
-
-    if(app){
-      app.style.display = "block";
-    }
-
-  }, 4000);
-
-  await boot();
-
-})();
-</script>
-
-</body>
-</html>
+  const app = document.getElementById("appC
