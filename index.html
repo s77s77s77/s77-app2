@@ -1081,9 +1081,9 @@ function renderEstado(data){
 
   setTotal(data.totalGeneral);
 
-  setFicha(data.fichasTotal);
+  aplicarValorFichaUI(data);
 
-  renderValorFicha(data.valorFicha, data.valorFichaLocked);
+  setFicha(data);
 
   renderAcierto(false, 0);
   }
