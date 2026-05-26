@@ -12,7 +12,6 @@
 <script type="module" src="https://unpkg.com/@dotlottie/player-component@latest/dist/dotlottie-player.mjs"></script>
 
 <style>
-
 body{
   font-family:impact;
   background-image:url("./bg.jpg");
@@ -36,8 +35,79 @@ body::before{
   z-index:-1;
 }
 
+h1{
+  color:white;
+  letter-spacing:3px;
+  text-shadow:
+    0 0 6px #ffffff,
+    0 0 12px #1e90ff,
+    0 0 20px #1e90ff;
+}
+
 .hidden{
   display:none;
+}
+
+.inputs{
+  display:grid;
+  gap:10px;
+  justify-content:center;
+}
+
+.inputs input{
+  width:70px;
+  height:70px;
+  font-size:34px;
+  font-weight:bold;
+  background:#000000;
+  border:3px solid #000000;
+  color:#ffffff;
+  text-align:center;
+}
+
+.ingreso{
+  display:grid;
+  grid-template-columns:1fr 1fr 1fr 1fr;
+  gap:15px;
+  justify-content:center;
+  align-items:start;
+  width:fit-content;
+  margin:0 auto;
+}
+
+.ingresoCol{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:6px;
+}
+
+.ingresoInput{
+  width:80px;
+  height:80px;
+  font-size:36px;
+  font-weight:bold;
+
+  background-image:url("./bg-casino-green.png");
+  background-size:cover;
+  background-position:center;
+  background-repeat:no-repeat;
+
+  border:none;
+  border-radius:8px;
+
+  color:#00ff88;
+
+  text-align:center;
+
+  text-shadow:0 0 6px #00ff88;
+
+  outline:none;
+}
+
+.label{
+  margin-top:0;
+  font-weight:bold;
 }
 
 .repBox{
@@ -95,6 +165,12 @@ body::before{
   border-radius:10px;
 }
 
+.totalLabel{
+  margin-top:0;
+  font-weight:bold;
+  color:#00e5ff;
+}
+
 .fichaBox{
   width:85px;
   height:85px;
@@ -116,6 +192,12 @@ body::before{
   justify-content:center;
 
   border-radius:8px;
+}
+
+.fichaLabel{
+  margin-top:0;
+  font-weight:bold;
+  color:#00ff88;
 }
 
 .gananciaBox{
@@ -141,6 +223,12 @@ body::before{
   border-radius:10px;
 }
 
+.gananciaLabel{
+  margin-top:0;
+  font-weight:bold;
+  color:#ffd700;
+}
+
 .rojoBox{
   width:90px;
   height:90px;
@@ -161,21 +249,42 @@ body::before{
   font-weight:bold;
 }
 
-.ingreso{
-  display:grid;
-  grid-template-columns:1fr 1fr 1fr 1fr;
-  gap:15px;
-  justify-content:center;
-  align-items:start;
-  width:fit-content;
-  margin:0 auto;
-}
-
-.ingresoCol{
+.aciertoWrap{
   display:flex;
   flex-direction:column;
   align-items:center;
-  gap:6px;
+  gap:4px;
+  margin-top:6px;
+}
+
+.aciertoBox{
+  width:90px;
+  height:90px;
+
+  font-size:48px;
+  font-weight:bold;
+
+  background-image:url("./bg-acierto-blue.png");
+  background-size:cover;
+  background-position:center;
+  background-repeat:no-repeat;
+
+  border:none;
+
+  color:#ffffff;
+
+  display:none;
+  align-items:center;
+  justify-content:center;
+
+  border-radius:10px;
+}
+
+.aciertoLabel{
+  margin-top:0;
+  font-weight:bold;
+  color:#00e5ff;
+  display:none;
 }
 
 button{
@@ -187,86 +296,357 @@ button{
   border-radius:8px;
 }
 
+.loginBox{
+  display:inline-block;
+  padding:14px 16px;
+  border:2px solid #444;
+  border-radius:10px;
+}
+
+.loginRow{
+  margin:8px 0;
+}
+
+.loginInput{
+  width:220px;
+  height:36px;
+  font-size:18px;
+  padding:6px 10px;
+  border:2px solid #444;
+  background:#111;
+  color:#fff;
+  border-radius:8px;
+}
+  .adminPanel{
+  width:340px;
+  margin:18px auto 0;
+  border:2px solid #444;
+  border-radius:10px;
+  padding:12px;
+  text-align:left;
+}
+
+.adminTitle{
+  font-weight:bold;
+  margin-bottom:10px;
+}
+
+.adminGrid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:8px;
+}
+
+.adminGrid input{
+  width:100%;
+  height:34px;
+  font-size:16px;
+  padding:4px 8px;
+  border:2px solid #444;
+  background:#111;
+  color:#fff;
+  border-radius:8px;
+}
+
+.adminBtns{
+  display:flex;
+  gap:8px;
+  margin-top:10px;
+}
+
+.adminBtns button{
+  flex:1;
+  padding:10px 0;
+}
+
+.adminOut{
+  margin-top:10px;
+  font-size:14px;
+  color:#ddd;
+  word-break:break-word;
+  line-height:1.35;
+}
+
+.smallNote{
+  margin-top:6px;
+  font-size:12px;
+  color:#aaa;
+}
+
+.logoutBtn{
+  margin-top:14px;
+  padding:8px 14px;
+  background:#222;
+  color:#fff;
+  border:2px solid #444;
+  border-radius:10px;
+  font-weight:bold;
+}
+
 </style>
 </head>
 <body>
 
 <h1>SISTEMA UNICO PREMIUM</h1>
 
-<div id="sistema">
+<div id="login" class="loginBox">
 
-<div class="repBox favoritosBox" id="favoritosBox">
-—
-</div>
+  <div class="loginRow">
+    <input id="usuario" class="loginInput" placeholder="Usuario">
+  </div>
 
-<div style="color:#00e5ff;font-size:26px;">
-FAVORITOS
-</div>
+  <div class="loginRow">
+    <input id="clave" class="loginInput" placeholder="Clave" type="password">
+  </div>
 
-<br>
+  <div class="loginRow">
+    <button onclick="ingresar()">INGRESAR</button>
+  </div>
 
-<div class="repBox onfireBox" id="onfireBox">
-—
-</div>
-
-<div style="color:#ff5500;font-size:26px;">
-ON FIRE
-</div>
-
-<br><br>
-
-<div class="ingreso">
-
-<div class="ingresoCol">
-
-<div id="totalGeneral" class="totalBox">
-0
-</div>
+  <p id="err" style="color:red;margin:6px 0 0;"></p>
 
 </div>
 
-<div class="ingresoCol">
+<div id="sistema" class="hidden">
 
-<div id="fichaGeneral" class="fichaBox">
-1
-</div>
+  <div class="inputs" id="casilleros"></div>
 
-</div>
+  <br>
 
-<div class="ingresoCol">
+  <div class="ingreso">
 
-<div id="gananciaGeneral" class="gananciaBox">
-0
-</div>
+    <div class="ingresoCol">
 
-</div>
+      <input id="nuevo" class="ingresoInput">
 
-<div class="ingresoCol">
+      <div class="label" style="color:#00ff88;">
+        INGRESO
+      </div>
 
-<div id="rojoBox" class="rojoBox">
-0
-</div>
+    </div>
 
-</div>
+  </div>
 
-</div>
+  <br>
 
-<br><br>
+  <div class="repBox favoritosBox" id="favoritosBox">
+    —
+  </div>
 
-<input id="nuevo">
+  <div class="label" style="color:#00e5ff;font-size:26px;">
+    FAVORITOS
+  </div>
 
-<button onclick="resetear()">
-REINICIAR
-</button>
+  <br>
+
+  <div class="repBox onfireBox" id="onfireBox">
+    —
+  </div>
+
+  <div class="label" style="color:#ff5500;font-size:26px;">
+    ON FIRE
+  </div>
+
+  <br>
+  <br>
+
+  <div class="ingreso">
+
+    <div class="ingresoCol">
+
+      <div id="totalGeneral" class="totalBox">
+        0
+      </div>
+
+      <div class="totalLabel">
+        TOTAL
+      </div>
+
+    </div>
+
+    <div class="ingresoCol">
+
+      <div id="fichaGeneral" class="fichaBox">
+        1
+      </div>
+
+      <div class="fichaLabel">
+        FICHA
+      </div>
+
+    </div>
+
+    <div class="ingresoCol">
+
+      <div id="gananciaGeneral" class="gananciaBox">
+        0
+      </div>
+
+      <div class="gananciaLabel">
+        GANANCIA
+      </div>
+
+      <div class="aciertoWrap">
+
+        <div id="aciertoBox" class="aciertoBox">
+          0
+        </div>
+
+        <div id="aciertoLabel" class="aciertoLabel">
+          ACIERTO
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="ingresoCol">
+
+      <div id="rojoBox" class="rojoBox">
+        0
+      </div>
+
+    </div>
+
+  </div>
+
+  <div style="margin-top:12px;">
+    <button onclick="resetear()">
+      REINICIAR
+    </button>
+  </div>
+
+  <div id="adminPanel" class="adminPanel hidden">
+
+    <div class="adminTitle">
+      CREAR USUARIO (CON VENCIMIENTO)
+    </div>
+
+    <div class="adminGrid">
+
+      <input id="newUser" placeholder="Usuario">
+
+      <input id="newPass" placeholder="Clave">
+
+    </div>
+
+    <div class="adminBtns">
+
+      <button onclick="crearUsuario(1)">
+        1 DÍA
+      </button>
+
+      <button onclick="crearUsuario(7)">
+        7 DÍAS
+      </button>
+
+      <button onclick="crearUsuario(30)">
+        30 DÍAS
+      </button>
+
+    </div>
+
+    <div id="adminOut" class="adminOut"></div>
+
+    <div class="smallNote">
+      Se guarda en el servidor.
+    </div>
+
+  </div>
+
+  <button class="logoutBtn" onclick="salir()">
+    SALIR
+  </button>
 
 </div>
 
 <script>
 
-const API = "https://s77-backend2.onrender.com";
+const API = "https://s77-backend1.onrender.com";
 
-const TOKEN =
-localStorage.getItem("S77_TOKEN_V1") || "";
+const TOKEN_KEY = "S77_TOKEN_V1";
+const ROLE_KEY  = "S77_ROLE_V1";
+
+let TOKEN = localStorage.getItem(TOKEN_KEY) || "";
+let ROLE  = localStorage.getItem(ROLE_KEY) || "";
+
+const GANANCIA_KEY = "S77_GANANCIA_UNIFICADA_REP3_REP4";
+
+let gananciaAcum = Number(
+  localStorage.getItem(GANANCIA_KEY) || 0
+);
+
+if(!Number.isFinite(gananciaAcum)){
+  gananciaAcum = 0;
+        }
+  function setGanancia(v){
+
+  gananciaAcum = Number(v) || 0;
+
+  gananciaGeneral.textContent = Math.round(gananciaAcum);
+
+  localStorage.setItem(
+    GANANCIA_KEY,
+    String(gananciaAcum)
+  );
+}
+
+setGanancia(gananciaAcum);
+
+function sumarGanancia(value){
+
+  const n = Number(value);
+
+  if(!Number.isFinite(n)) return;
+
+  setGanancia(gananciaAcum + n);
+}
+
+function renderAcierto(show, value){
+
+  if(show){
+
+    aciertoBox.style.display = "flex";
+    aciertoLabel.style.display = "block";
+
+    aciertoBox.textContent = String(
+      Math.round(Number(value) || 0)
+    );
+
+  }else{
+
+    aciertoBox.style.display = "none";
+    aciertoLabel.style.display = "none";
+    aciertoBox.textContent = "0";
+  }
+}
+
+function setTotal(v){
+
+  const n = Number(v);
+
+  totalGeneral.textContent = Number.isFinite(n)
+    ? String(Math.round(n))
+    : "0";
+}
+
+function setFicha(v){
+
+  const n = Number(v);
+
+  fichaGeneral.textContent = Number.isFinite(n)
+    ? String(Math.round(n))
+    : "1";
+}
+
+function setRojo(v){
+
+  const n = Number(v);
+
+  rojoBox.textContent = Number.isFinite(n)
+    ? String(Math.round(n))
+    : "0";
+}
 
 function renderLista(id, arr){
 
@@ -275,7 +655,7 @@ function renderLista(id, arr){
   if(!el) return;
 
   const clean = Array.isArray(arr)
-    ? [...arr].sort((a,b)=>a-b)
+    ? [...arr].sort((a,b)=>Number(a)-Number(b))
     : [];
 
   el.textContent = clean.length
@@ -283,25 +663,199 @@ function renderLista(id, arr){
     : "—";
 }
 
-function setTotal(v){
+const NUM_BG = {
+  0:"#0b7a3b",
+  1:"#ff0000", 2:"#000000", 3:"#ff0000", 4:"#000000", 5:"#ff0000",
+  6:"#000000", 7:"#ff0000", 8:"#000000", 9:"#ff0000", 10:"#000000",
+  11:"#000000", 12:"#ff0000", 13:"#000000", 14:"#ff0000", 15:"#000000",
+  16:"#ff0000", 17:"#000000", 18:"#ff0000", 19:"#ff0000", 20:"#000000",
+  21:"#ff0000", 22:"#000000", 23:"#ff0000", 24:"#000000", 25:"#ff0000",
+  26:"#000000", 27:"#ff0000", 28:"#000000", 29:"#000000", 30:"#ff0000",
+  31:"#000000", 32:"#ff0000", 33:"#000000", 34:"#ff0000", 35:"#000000",
+  36:"#ff0000"
+};
 
-  totalGeneral.textContent =
-    String(Math.round(Number(v) || 0));
+function pintarCasilleroPorNumero(inputEl){
+
+  const v = parseInt(inputEl.value, 10);
+
+  inputEl.style.background = Number.isFinite(v)
+    ? (NUM_BG[v] || "#000")
+    : "#000";
+
+  inputEl.style.color = "#fff";
+  inputEl.style.borderColor = "#000";
 }
 
-function setFicha(v){
+function validarNumero(n){
 
-  fichaGeneral.textContent =
-    String(Math.round(Number(v) || 1));
+  if(!Number.isInteger(n)){
+    return {
+      ok:false,
+      msg:"Tenés que ingresar un número entero."
+    };
+  }
+
+  if(n < 0 || n > 36){
+    return {
+      ok:false,
+      msg:"Solo se permiten números del 0 al 36."
+    };
+  }
+
+  return {
+    ok:true,
+    msg:""
+  };
 }
 
-function setRojo(v){
+async function ingresar(){
 
-  rojoBox.textContent =
-    String(Math.round(Number(v) || 0));
+  const u = (usuario.value || "").trim();
+  const p = (clave.value || "").trim();
+
+  if(!u || !p){
+    err.innerText = "Completa usuario y clave";
+    return;
+  }
+
+  try{
+
+    const r = await fetch(`${API}/auth/login`,{
+
+      method:"POST",
+
+      headers:{
+        "Content-Type":"application/json"
+      },
+
+      body: JSON.stringify({
+        user:u,
+        pass:p
+      })
+
+    });
+
+    const data = await r.json();
+
+    if(!r.ok){
+      err.innerText = "Usuario/clave inválidos o vencidos";
+      return;
+    }
+
+    TOKEN = data.token;
+    ROLE = data.role;
+
+    localStorage.setItem(TOKEN_KEY, TOKEN);
+    localStorage.setItem(ROLE_KEY, ROLE);
+
+    err.innerText = "";
+
+    mostrarSistema();
+
+    await cargarEstado();
+
+  }catch(e){
+
+    err.innerText = "No conecta con servidor";
+  }
+}
+
+function mostrarLogin(){
+
+  login.classList.remove("hidden");
+  login.style.display = "inline-block";
+
+  sistema.classList.add("hidden");
+  sistema.style.display = "none";
+}
+
+function mostrarSistema(){
+
+  login.classList.add("hidden");
+  login.style.display = "none";
+
+  sistema.classList.remove("hidden");
+  sistema.style.display = "block";
+}
+
+function salir(){
+
+  TOKEN = "";
+  ROLE = "";
+
+  localStorage.removeItem(TOKEN_KEY);
+  localStorage.removeItem(ROLE_KEY);
+
+  mostrarLogin();
+}
+
+function renderInicial(){
+
+  casilleros.innerHTML = "";
+
+  casilleros.style.gridTemplateColumns =
+    "repeat(4,70px)";
+
+  for(let i=0;i<16;i++){
+
+    const c = document.createElement("input");
+
+    c.disabled = true;
+    c.value = "";
+
+    pintarCasilleroPorNumero(c);
+
+    casilleros.appendChild(c);
+  }
+  }
+  function renderCasilleros(data){
+
+  casilleros.innerHTML = "";
+
+  if(data.historialLen < 17){
+
+    casilleros.style.gridTemplateColumns =
+      "repeat(4,70px)";
+
+    data.ultimos16.forEach(v => {
+
+      const c = document.createElement("input");
+
+      c.disabled = true;
+      c.value = v;
+
+      pintarCasilleroPorNumero(c);
+
+      casilleros.appendChild(c);
+    });
+
+    if(data.historialLen === 0){
+      renderInicial();
+    }
+
+  }else{
+
+    casilleros.style.gridTemplateColumns =
+      "repeat(5,70px)";
+
+    data.ultimos5.forEach(v => {
+
+      const c = document.createElement("input");
+
+      c.disabled = true;
+      c.value = v;
+
+      pintarCasilleroPorNumero(c);
+
+      casilleros.appendChild(c);
+    });
+  }
 }
 
 function renderEstado(data){
+
+  renderCasilleros(data);
 
   renderLista(
     "favoritosBox",
@@ -313,29 +867,29 @@ function renderEstado(data){
     data.onfire
   );
 
-  setTotal(data.totalGeneral);
-
-  setFicha(data.activeMult);
-
-  setRojo(data.totalRojo);
-
-  const fav =
-    document.getElementById("favoritosBox");
-
   if(data.favoritosModoRojo){
 
-    fav.classList.add(
+    favoritosBox.classList.add(
       "favoritosModoRojo"
     );
 
   }else{
 
-    fav.classList.remove(
+    favoritosBox.classList.remove(
       "favoritosModoRojo"
     );
   }
+
+  setRojo(data.totalRojo);
+
+  setTotal(data.totalGeneral);
+
+  setFicha(data.activeMult);
+
+  renderAcierto(false, 0);
 }
-  async function cargarEstado(){
+
+async function cargarEstado(){
 
   try{
 
@@ -346,11 +900,13 @@ function renderEstado(data){
       headers:{
         "Authorization": `Bearer ${TOKEN}`
       }
+
     });
 
     const data = await r.json();
 
     if(!r.ok){
+      salir();
       return;
     }
 
@@ -364,6 +920,13 @@ function renderEstado(data){
 
 async function resetear(){
 
+  if(!TOKEN){
+    alert("Tenés que estar logueado.");
+    return;
+  }
+
+  if(!confirm("¿Seguro querés reiniciar tu historial?")) return;
+
   try{
 
     const r = await fetch(`${API}/api/reset`,{
@@ -373,17 +936,29 @@ async function resetear(){
       headers:{
         "Authorization": `Bearer ${TOKEN}`
       }
+
     });
 
     if(!r.ok){
+      alert("No se pudo reiniciar.");
       return;
     }
+
+    setTotal(0);
+    setFicha(1);
+    setGanancia(0);
+    setRojo(0);
+
+    renderLista("favoritosBox", []);
+    renderLista("onfireBox", []);
+
+    renderAcierto(false, 0);
 
     await cargarEstado();
 
   }catch(e){
 
-    alert("Error reset");
+    alert("No conecta con backend.");
   }
 }
 
@@ -391,17 +966,17 @@ nuevo.addEventListener("keydown", async (e) => {
 
   if(e.key !== "Enter") return;
 
-  const n = parseInt(
-    nuevo.value,
-    10
-  );
+  if(!TOKEN){
+    alert("Primero tenés que ingresar.");
+    return;
+  }
 
-  if(
-    !Number.isInteger(n) ||
-    n < 0 ||
-    n > 36
-  ){
-    alert("Número inválido");
+  const n = parseInt(nuevo.value, 10);
+
+  const v = validarNumero(n);
+
+  if(!v.ok){
+    alert(v.msg);
     return;
   }
 
@@ -419,37 +994,43 @@ nuevo.addEventListener("keydown", async (e) => {
       },
 
       body: JSON.stringify({ n })
+
     });
 
     const data = await r.json();
 
     if(!r.ok){
+      salir();
       return;
     }
 
     renderEstado(data);
 
-    if(data.aciertoShow){
+    const show = !!data.aciertoShow;
+    const val  = Number(data.aciertoValue);
 
-      const actual =
-        Number(
-          gananciaGeneral.textContent
-        ) || 0;
+    renderAcierto(show, val);
 
-      gananciaGeneral.textContent =
-        String(
-          actual +
-          Number(data.aciertoValue || 0)
-        );
+    if(show){
+      sumarGanancia(val);
     }
 
-  }catch(e){
+  }catch(err){
 
-    alert("No conecta");
+    alert("No conecta con backend.");
   }
 });
 
-cargarEstado();
+if(TOKEN){
+
+  mostrarSistema();
+
+  cargarEstado();
+
+}else{
+
+  mostrarLogin();
+}
 
 </script>
 
