@@ -1,1 +1,457 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
 
+<link rel="manifest" href="./manifest.json">
+<meta name="theme-color" content="#000000">
+<link rel="icon" type="image/png" href="./icon-192.png">
+
+<title>SISTEMA UNICO PREMIUM</title>
+
+<script type="module" src="https://unpkg.com/@dotlottie/player-component@latest/dist/dotlottie-player.mjs"></script>
+
+<style>
+
+body{
+  font-family:impact;
+  background-image:url("./bg.jpg");
+  background-size:cover;
+  background-position:center;
+  background-repeat:no-repeat;
+  background-attachment:fixed;
+  color:blue;
+  text-align:center;
+  padding:20px;
+}
+
+body::before{
+  content:"";
+  position:fixed;
+  top:0;
+  left:0;
+  right:0;
+  bottom:0;
+  background:rgba(0,0,0,0.65);
+  z-index:-1;
+}
+
+.hidden{
+  display:none;
+}
+
+.repBox{
+  width:340px;
+  min-height:65px;
+
+  margin:10px auto;
+
+  border:6px solid #444;
+
+  font-weight:bold;
+
+  padding:10px;
+
+  color:#fff;
+
+  font-size:44px;
+}
+
+.favoritosBox{
+  background:#172742;
+  border-color:#00e5ff;
+}
+
+.favoritosModoRojo{
+  background:#ff0000 !important;
+  border:6px solid #000000 !important;
+}
+
+.onfireBox{
+  background:#3b150e;
+  border-color:#ff5500;
+}
+
+.totalBox{
+  width:130px;
+  height:80px;
+
+  font-size:30px;
+  font-weight:bold;
+
+  background-image:url("./btn-neon-cian.png");
+  background-size:cover;
+  background-position:center;
+  background-repeat:no-repeat;
+
+  border:none;
+
+  color:#ffffff;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  border-radius:10px;
+}
+
+.fichaBox{
+  width:85px;
+  height:85px;
+
+  font-size:38px;
+  font-weight:bold;
+
+  background-image:url("./ficha-verde.png");
+  background-size:cover;
+  background-position:center;
+  background-repeat:no-repeat;
+
+  border:none;
+
+  color:#000;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  border-radius:8px;
+}
+
+.gananciaBox{
+  width:130px;
+  height:80px;
+
+  font-size:30px;
+  font-weight:bold;
+
+  background-image:url("./btn-neon-gold.png");
+  background-size:cover;
+  background-position:center;
+  background-repeat:no-repeat;
+
+  border:none;
+
+  color:#ffffff;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  border-radius:10px;
+}
+
+.rojoBox{
+  width:90px;
+  height:90px;
+
+  background:#8b0000;
+
+  border:4px solid #000;
+
+  border-radius:10px;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  color:#fff;
+
+  font-size:42px;
+  font-weight:bold;
+}
+
+.ingreso{
+  display:grid;
+  grid-template-columns:1fr 1fr 1fr 1fr;
+  gap:15px;
+  justify-content:center;
+  align-items:start;
+  width:fit-content;
+  margin:0 auto;
+}
+
+.ingresoCol{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:6px;
+}
+
+button{
+  padding:10px;
+  background:maroon;
+  color:white;
+  font-weight:bold;
+  border:none;
+  border-radius:8px;
+}
+
+</style>
+</head>
+<body>
+
+<h1>SISTEMA UNICO PREMIUM</h1>
+
+<div id="sistema">
+
+<div class="repBox favoritosBox" id="favoritosBox">
+—
+</div>
+
+<div style="color:#00e5ff;font-size:26px;">
+FAVORITOS
+</div>
+
+<br>
+
+<div class="repBox onfireBox" id="onfireBox">
+—
+</div>
+
+<div style="color:#ff5500;font-size:26px;">
+ON FIRE
+</div>
+
+<br><br>
+
+<div class="ingreso">
+
+<div class="ingresoCol">
+
+<div id="totalGeneral" class="totalBox">
+0
+</div>
+
+</div>
+
+<div class="ingresoCol">
+
+<div id="fichaGeneral" class="fichaBox">
+1
+</div>
+
+</div>
+
+<div class="ingresoCol">
+
+<div id="gananciaGeneral" class="gananciaBox">
+0
+</div>
+
+</div>
+
+<div class="ingresoCol">
+
+<div id="rojoBox" class="rojoBox">
+0
+</div>
+
+</div>
+
+</div>
+
+<br><br>
+
+<input id="nuevo">
+
+<button onclick="resetear()">
+REINICIAR
+</button>
+
+</div>
+
+<script>
+
+const API = "https://s77-backend2.onrender.com";
+
+const TOKEN =
+localStorage.getItem("S77_TOKEN_V1") || "";
+
+function renderLista(id, arr){
+
+  const el = document.getElementById(id);
+
+  if(!el) return;
+
+  const clean = Array.isArray(arr)
+    ? [...arr].sort((a,b)=>a-b)
+    : [];
+
+  el.textContent = clean.length
+    ? clean.join(" ")
+    : "—";
+}
+
+function setTotal(v){
+
+  totalGeneral.textContent =
+    String(Math.round(Number(v) || 0));
+}
+
+function setFicha(v){
+
+  fichaGeneral.textContent =
+    String(Math.round(Number(v) || 1));
+}
+
+function setRojo(v){
+
+  rojoBox.textContent =
+    String(Math.round(Number(v) || 0));
+}
+
+function renderEstado(data){
+
+  renderLista(
+    "favoritosBox",
+    data.favoritos
+  );
+
+  renderLista(
+    "onfireBox",
+    data.onfire
+  );
+
+  setTotal(data.totalGeneral);
+
+  setFicha(data.activeMult);
+
+  setRojo(data.totalRojo);
+
+  const fav =
+    document.getElementById("favoritosBox");
+
+  if(data.favoritosModoRojo){
+
+    fav.classList.add(
+      "favoritosModoRojo"
+    );
+
+  }else{
+
+    fav.classList.remove(
+      "favoritosModoRojo"
+    );
+  }
+}
+  async function cargarEstado(){
+
+  try{
+
+    const r = await fetch(`${API}/api/state`,{
+
+      method:"GET",
+
+      headers:{
+        "Authorization": `Bearer ${TOKEN}`
+      }
+    });
+
+    const data = await r.json();
+
+    if(!r.ok){
+      return;
+    }
+
+    renderEstado(data);
+
+  }catch(e){
+
+    alert("No conecta con backend");
+  }
+}
+
+async function resetear(){
+
+  try{
+
+    const r = await fetch(`${API}/api/reset`,{
+
+      method:"POST",
+
+      headers:{
+        "Authorization": `Bearer ${TOKEN}`
+      }
+    });
+
+    if(!r.ok){
+      return;
+    }
+
+    await cargarEstado();
+
+  }catch(e){
+
+    alert("Error reset");
+  }
+}
+
+nuevo.addEventListener("keydown", async (e) => {
+
+  if(e.key !== "Enter") return;
+
+  const n = parseInt(
+    nuevo.value,
+    10
+  );
+
+  if(
+    !Number.isInteger(n) ||
+    n < 0 ||
+    n > 36
+  ){
+    alert("Número inválido");
+    return;
+  }
+
+  nuevo.value = "";
+
+  try{
+
+    const r = await fetch(`${API}/api/enter`,{
+
+      method:"POST",
+
+      headers:{
+        "Content-Type":"application/json",
+        "Authorization": `Bearer ${TOKEN}`
+      },
+
+      body: JSON.stringify({ n })
+    });
+
+    const data = await r.json();
+
+    if(!r.ok){
+      return;
+    }
+
+    renderEstado(data);
+
+    if(data.aciertoShow){
+
+      const actual =
+        Number(
+          gananciaGeneral.textContent
+        ) || 0;
+
+      gananciaGeneral.textContent =
+        String(
+          actual +
+          Number(data.aciertoValue || 0)
+        );
+    }
+
+  }catch(e){
+
+    alert("No conecta");
+  }
+});
+
+cargarEstado();
+
+</script>
+
+</body>
+</html>
