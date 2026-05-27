@@ -947,6 +947,10 @@ async function resetear(){
       return;
     }
 
+    const data = await r.json();
+
+    renderInicial();
+
     setTotal(0);
     setFicha(1);
     setGanancia(0);
@@ -955,15 +959,17 @@ async function resetear(){
     renderLista("favoritosBox", []);
     renderLista("onfireBox", []);
 
-    renderAcierto(false, 0);
+    favoritosBox.classList.remove(
+      "favoritosModoRojo"
+    );
 
-    await cargarEstado();
+    renderAcierto(false, 0);
 
   }catch(e){
 
     alert("No conecta con backend.");
   }
-}
+  }
 
 nuevo.addEventListener("keydown", async (e) => {
 
