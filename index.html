@@ -1186,7 +1186,13 @@ function renderEstado(data){
 
   renderCasilleros(data);
 
-  if(data.mostrarBusquedaRapida){
+  const onfireBoxEl =
+  document.getElementById("onfireBox");
+
+const onfireLabelEl =
+  document.querySelectorAll(".label")[2];
+
+if(data.mostrarBusquedaRapida){
 
   document.getElementById(
     "favoritosLabel"
@@ -1198,10 +1204,8 @@ function renderEstado(data){
     data.busquedaRapida || []
   );
 
-  renderLista(
-    "onfireBox",
-    []
-  );
+  onfireBoxEl.style.display = "none";
+  onfireLabelEl.style.display = "none";
 
 }else{
 
@@ -1219,6 +1223,9 @@ function renderEstado(data){
     "onfireBox",
     data.onfire
   );
+
+  onfireBoxEl.style.display = "";
+  onfireLabelEl.style.display = "";
 
   }
 
