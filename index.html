@@ -594,8 +594,10 @@ overflow-x:auto;
     —
   </div>
 
-  <div class="label" style="color:#00e5ff;font-size:26px;">
-    FAVORITOS
+  <div id="favoritosLabel"
+     class="label"
+     style="color:#00e5ff;font-size:26px;">
+  FAVORITOS
   </div>
 
   <br>
@@ -1186,6 +1188,11 @@ function renderEstado(data){
 
   if(data.mostrarBusquedaRapida){
 
+  document.getElementById(
+    "favoritosLabel"
+  ).textContent =
+    "BÚSQUEDA RÁPIDA";
+
   renderLista(
     "favoritosBox",
     data.busquedaRapida || []
@@ -1197,6 +1204,11 @@ function renderEstado(data){
   );
 
 }else{
+
+  document.getElementById(
+    "favoritosLabel"
+  ).textContent =
+    "FAVORITOS";
 
   renderLista(
     "favoritosBox",
