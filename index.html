@@ -1184,6 +1184,20 @@ function renderEstado(data){
 
   renderCasilleros(data);
 
+  if(data.mostrarBusquedaRapida){
+
+  renderLista(
+    "favoritosBox",
+    data.busquedaRapida || []
+  );
+
+  renderLista(
+    "onfireBox",
+    []
+  );
+
+}else{
+
   renderLista(
     "favoritosBox",
     data.favoritos
@@ -1193,6 +1207,8 @@ function renderEstado(data){
     "onfireBox",
     data.onfire
   );
+
+  }
 
   const banner =
     document.getElementById("pauseBanner");
