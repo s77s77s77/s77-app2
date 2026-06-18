@@ -1276,6 +1276,10 @@ async function cargarEstado(){
 
     const data = await r.json();
 
+    console.log("modoRapido:", data.modoRapido);
+    console.log("mostrarBusquedaRapida:", data.mostrarBusquedaRapida);
+    console.log("busquedaRapida:", data.busquedaRapida);
+
     if(!r.ok){
       salir();
       return;
@@ -1377,7 +1381,9 @@ nuevo.addEventListener("keydown", async (e) => {
     }, 12000);
 
     const data = await r.json();
-
+    console.log("modoRapido:", data.modoRapido);
+    console.log("mostrarBusquedaRapida:", data.mostrarBusquedaRapida);
+    console.log("busquedaRapida:", data.busquedaRapida);
     if(!r.ok){
       salir();
       return;
