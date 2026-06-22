@@ -609,11 +609,30 @@ overflow-x:auto;
   </div>
 
   <div class="label" style="color:#ff5500;font-size:26px;">
-    ON FIRE
-  </div>
+  ON FIRE
+</div>
 
-  <br>
-  <br>
+<br>
+
+<div class="repBox"
+     id="miniBox"
+     style="
+       background:#16351b;
+       border-color:#66ff99;
+     ">
+  —
+</div>
+
+<div class="label"
+     style="
+       color:#66ff99;
+       font-size:26px;
+     ">
+  MINI SISTEMA
+</div>
+
+<br>
+<br>
   <!-- =========================
        CUENTA UNIFICADA REP3 + REP4+
   ========================= -->
@@ -684,9 +703,16 @@ overflow-x:auto;
   </div>
 
   <div style="margin-top:12px;">
-    <button onclick="resetear()">
-      REINICIAR
-    </button>
+
+  <button onclick="resetear()">
+    REINICIAR
+  </button>
+
+  <button onclick="resetearTotal()"
+          style="margin-left:10px;">
+    REINICIAR TOTAL
+  </button>
+
   </div>
 
   <div id="adminPanel" class="adminPanel hidden">
@@ -1056,7 +1082,7 @@ if(panel){
 
     document.getElementById("favoritosBox").style.display = "none";
     document.getElementById("onfireBox").style.display = "none";
-
+    document.getElementById("miniBox").style.display = "none";
     document.getElementById("totalGeneral").parentElement.parentElement.style.display = "none";
 
     document.querySelectorAll(".label")[1].style.display = "none";
@@ -1089,7 +1115,9 @@ if(music){
   document.getElementById("favoritosBox").style.display = "";
 
   document.getElementById("onfireBox").style.display = "";
-
+  
+  document.getElementById("miniBox").style.display = "";
+ 
   document.getElementById("totalGeneral").parentElement.parentElement.style.display = "";
 
   document.querySelectorAll(".label")[1].style.display = "";
@@ -1190,9 +1218,14 @@ function renderEstado(data){
   );
 
   renderLista(
-    "onfireBox",
-    data.onfire
-  );
+  "onfireBox",
+  data.onfire
+);
+
+renderLista(
+  "miniBox",
+  data.miniSistema || []
+);
 
   const banner =
     document.getElementById("pauseBanner");
